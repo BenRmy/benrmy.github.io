@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hexo自建博客">
+    <meta name="keyword"  content="python 爬虫 rmy">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        python3的一些使用点 - Rmy的博客 | Rmy&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 大道甚夷,而人好径,终为所误 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rmy</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE-Context-Management-Protocol"><span class="toc-text">上下文管理协议(Context Management Protocol)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8-Context-Manager"><span class="toc-text">上下文管理器(Context Manager)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87-runtime-context"><span class="toc-text">运行时上下文(runtime context)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E8%A1%A8%E8%BE%BE%E5%BC%8F-Context-Expression"><span class="toc-text">上下文表达式(Context Expression)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E4%BD%93-with-body"><span class="toc-text">语句体(with-body)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#contextlib-%E6%A8%A1%E5%9D%97"><span class="toc-text">contextlib 模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%93-%E6%A1%86%E6%9E%B6%E6%B3%A8%E6%84%8F"><span class="toc-text">库&#x2F;框架注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E5%8A%A3%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-text">避免劣化代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E5%86%99pythonic%E4%BB%A3%E7%A0%81"><span class="toc-text">编写pythonic代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7"><span class="toc-text">python语言特性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E8%87%AA%E7%9C%81"><span class="toc-text">Python自省</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC%E5%BC%8F%EF%BC%88%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%81%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F%E3%80%81%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F%EF%BC%89"><span class="toc-text">推导式（列表推导式、字典推导式、集合推导式）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%99%A8generator"><span class="toc-text">生成器generator</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E5%92%8C%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF"><span class="toc-text">单下划线和双下划线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-text">字符串格式化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#args-and-kwargs-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="toc-text">*args and **kwargs(可变参数)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%A7%A3%E5%8C%85"><span class="toc-text">变量解包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E5%87%BD%E6%95%B0%E7%9A%844%E4%B8%AA%E5%8E%9F%E5%88%99"><span class="toc-text">编写函数的4个原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#assert%E6%96%AD%E8%A8%80"><span class="toc-text">assert断言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2%E7%9A%84%E6%97%B6%E5%80%99%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E4%B8%AD%E9%97%B4%E5%8F%98%E9%87%8F"><span class="toc-text">数据交换的时候不推荐使用中间变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%85%E5%88%86%E5%88%A9%E7%94%A8Lazy-evaluation%E7%9A%84%E7%89%B9%E6%80%A7-%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%8C%E5%BB%B6%E8%BF%9F%E8%AE%A1%E7%AE%97-%EF%BC%9A"><span class="toc-text">充分利用Lazy evaluation的特性(生成器，延迟计算)：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0"><span class="toc-text">生成器函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#and%E5%92%8Cor%E7%9A%84%E6%88%AA%E6%96%AD"><span class="toc-text">and和or的截断</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B"><span class="toc-text">判断类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E8%AE%A1%E7%AE%97"><span class="toc-text">浮点计算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#enumerate"><span class="toc-text">enumerate()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%B8%85-%E4%B8%8Eis%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">分清&#x3D;&#x3D;与is的适用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%80%83%E8%99%91%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-text">考虑兼容性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%90%88%E7%90%86%E7%9A%84%E5%8C%85%E5%B1%82%E6%AC%A1%E6%9D%A5%E7%AE%A1%E7%90%86module"><span class="toc-text">构建合理的包层次来管理module</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python%E6%8F%90%E4%BE%9B%E4%BA%86%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%9D%A5%E5%AF%BC%E5%85%A5%E5%A4%96%E9%83%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">python提供了三种方式来导入外部模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#i-1%E4%B8%8D%E7%AD%89%E4%BA%8Ei-i-1"><span class="toc-text">i+&#x3D;1不等于i&#x3D;i+1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E5%92%8C%E2%80%931"><span class="toc-text">++1和–1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8with%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E8%B5%84%E6%BA%90"><span class="toc-text">使用with自动关闭资源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8%E5%8D%8F%E8%AE%AE"><span class="toc-text">上下文管理器协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8else%E5%AD%90%E5%8F%A5%E7%AE%80%E5%8C%96%E5%BE%AA%E7%8E%AF-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">使用else子句简化循环(异常处理)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%9A%84%E5%87%A0%E7%82%B9%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="toc-text">异常处理的几点基本原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%BF%E5%85%8Dfinally%E4%B8%AD%E5%8F%AF%E8%83%BD%E5%8F%91%E7%94%9F%E7%9A%84%E9%99%B7%E9%98%B1"><span class="toc-text">避免finally中可能发生的陷阱</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3None%EF%BC%8C%E6%AD%A3%E7%A1%AE%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA"><span class="toc-text">深入理解None，正确判断对象是否为空</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nonzero-%E6%96%B9%E6%B3%95"><span class="toc-text">nonzero()方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BA%94%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8join%E8%80%8C%E4%B8%8D%E6%98%AF"><span class="toc-text">连接字符串应优先使用join而不是+</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B0%BD%E9%87%8F%E4%BD%BF%E7%94%A8format-%E6%96%B9%E5%BC%8F%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF"><span class="toc-text">格式化字符串尽量使用format()方式，而不是%</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">对齐方式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%EF%BC%9A"><span class="toc-text">符号：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB%E5%AF%B9%E5%BE%85%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1%E5%92%8C%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1"><span class="toc-text">区别对待可变对象和不可变对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AD%A6%E6%83%95%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E6%BD%9C%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">警惕默认参数潜在的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%85%8E%E7%94%A8%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0"><span class="toc-text">慎用变长参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%82%E6%95%B0"><span class="toc-text">关键字参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%82%E6%95%B0"><span class="toc-text">命名关键字参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%BB%84%E5%90%88"><span class="toc-text">参数组合</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#str-%E5%92%8Crepr-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">str()和repr()的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%B8%85classmethod%E5%92%8Cstaticmethod%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">分清classmethod和staticmethod的适用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#staticmethod%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-text">staticmethod静态方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#classmethod%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-text">classmethod类方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#property%E5%B1%9E%E6%80%A7"><span class="toc-text">property属性</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 大道甚夷,而人好径,终为所误 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        python3的一些使用点
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-16 11:04:05</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><ul>
+<li>字符串推荐使用format占位匹配，进行格式化字符串。</li>
+<li>reversed：序列(列表，元组，字符串，不改变原对象)反转，(另一种方式：<code>aa[::-1]</code>)：使用reversed时是返回一个迭代器，当第一次使用时会消耗该迭代器，以致留下空序列，所以无法再次使用该迭代器进行迭代操作(相当于生成器)。</li>
+<li>for循环迭代(迭代：iteration、可迭代的：Iterable、迭代器：iterator)：迭代相比较迭代器更加抽象，用到for…in…的操作，称之为迭代，而这种能遍历的行为或者能迭代的行为称之为可迭代的，而迭代器是具体到迭代行为的操作者或者说是实行者，在Python中有个iter() 函数专门返回的就是迭代器对象，而这个对象可以通过next的属性对可迭代对象进行遍历，称这种对象为迭代器。python的for循环抽象程序要高于java 的for循环，因为python的for循环不仅可以用在list和tuple上，还可以作用在其他可迭代的对象上(比如没有下标的 dict)。同时支持for N1，N2，N3… in list:，即可迭代对象中还有可迭代对象(数目相同)。使用dir()函数查看对象的属性列表，如果只有<strong>iter</strong>()函数则是可迭代的，如果<strong>iter</strong>()和<strong>next</strong>()函数都有则是迭代器；或者使用isinstance() 函数来判断一个对象是否是一个已知的迭代类型。</li>
+<li>with语句及其打开文件：with 语句适用于对资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的清理操作，释放资源。</li>
+</ul>
+<h2 id="上下文管理协议-Context-Management-Protocol"><a href="#上下文管理协议-Context-Management-Protocol" class="headerlink" title="上下文管理协议(Context Management Protocol)"></a>上下文管理协议(Context Management Protocol)</h2><p>包含方法 <strong>enter</strong>() 和 <strong>exit</strong>()，支持该协议的对象要实现这两个方法。</p>
+<h2 id="上下文管理器-Context-Manager"><a href="#上下文管理器-Context-Manager" class="headerlink" title="上下文管理器(Context Manager)"></a>上下文管理器(Context Manager)</h2><p>支持上下文管理协议的对象，这种对象实现了<code>__enter__() 和 __exit__()</code>方法。上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。</p>
+<h2 id="运行时上下文-runtime-context"><a href="#运行时上下文-runtime-context" class="headerlink" title="运行时上下文(runtime context)"></a>运行时上下文(runtime context)</h2><p>由上下文管理器创建，通过上下文管理器的 <code>__enter__() 和__exit__()</code> 方法实现，<code>__enter__()</code> 方法在语句体执行之前进入运行时上下文，<code>__exit__()</code> 在语句体执行完后从运行时上下文退出。with 语句支持运行时上下文这一概念。</p>
+<h2 id="上下文表达式-Context-Expression"><a href="#上下文表达式-Context-Expression" class="headerlink" title="上下文表达式(Context Expression)"></a>上下文表达式(Context Expression)</h2><p>with 语句中跟在关键字 with 之后的表达式，该表达式要返回一个上下文管理器对象。</p>
+<h2 id="语句体-with-body"><a href="#语句体-with-body" class="headerlink" title="语句体(with-body)"></a>语句体(with-body)</h2><p>with 语句包裹起来的代码块，在执行语句体之前会调用上下文管理器的 <code>__enter__()</code>方法，执行完语句体之后会执行 <code>__exit__()</code> 方法。</p>
+<h2 id="contextlib-模块"><a href="#contextlib-模块" class="headerlink" title="contextlib 模块"></a>contextlib 模块</h2><p>提供了3个对象：装饰器 contextmanager、函数 nested(可将多个上下文管理器组织在一起，避免嵌套with语句) 和上下文管理器 closing。使用这些对象，可以对已有的生成器函数或者对象进行包装，加入对上下文管理协议的支持，避免了专门编写上下文管理器来支持 with 语句。</p>
+<p>使用nested注意：发生异常后，如果某个上下文管理器的 <code>__exit__()</code> 方法对异常处理返回 False(向上层抛异常)，则更外层的上下文管理器不会监测到异常。</p>
+<h1 id="库-框架注意"><a href="#库-框架注意" class="headerlink" title="库/框架注意"></a>库/框架注意</h1><ul>
+<li>包和模块的命名采用小写、单数形式，而且短小。</li>
+<li>包通常仅作为命名空间，如只包含空的<strong>init</strong>.py文件。</li>
+</ul>
+<h1 id="避免劣化代码"><a href="#避免劣化代码" class="headerlink" title="避免劣化代码"></a>避免劣化代码</h1><ul>
+<li>避免只用大小写来区分不同的对象。</li>
+<li>避免使用容易引起混淆的名称。</li>
+<li>不要害怕过长的变量名。</li>
+</ul>
+<h1 id="编写pythonic代码"><a href="#编写pythonic代码" class="headerlink" title="编写pythonic代码"></a>编写pythonic代码</h1><ul>
+<li>全面掌握python提供的所有特性，包括语言特性和库特性。</li>
+<li>随着python的更新要不断更新python知识。</li>
+<li>深入学习业界公认的比较pythonic的代码，比如Flask、gevent和requests等。</li>
+<li>可以采用PEP8规范检查python是否够pythonic。</li>
+</ul>
+<p>C是编译性语言，python是脚本语言，从原理上来说是完全不一样的。一些语法的不同：</p>
+<ul>
+<li>缩进与{}。</li>
+<li>单双引号。</li>
+<li>三元操作符?:。python使用x if condition else y来替代。</li>
+<li>switch case。python没有这个，可以使用if…elif…else来替换，也可以使用跳转表实现：def f(x):return {0: ‘NOK’，1: ‘OK’，2: ‘Go’}.get(x，’Default’)</li>
+<li>在代码中适当添加注释。</li>
+<li>通过适当添加空行使代码布局更为优雅、合理。</li>
+</ul>
+<h1 id="python语言特性"><a href="#python语言特性" class="headerlink" title="python语言特性"></a>python语言特性</h1><p>函数传参：Python中所有的变量都可以理解为内存中一个对象的引用，或者也可以看似C中的void *。这里记住的是类型是属于对象的，而不是变量。对象分为两种：</p>
+<ul>
+<li>可更改的：list，dict</li>
+<li>不可更改的：strings，tuples，numbers</li>
+</ul>
+<p>当向函数传递一个参数，即引用的时候：</p>
+<ul>
+<li>如果该参数是函数外一个不可变的对象的引用，则函数执行完之后，在函数外打印的是原来的值，与函数对该引用做什么事情无关。</li>
+<li>如果该函数是函数外一个可变的对象的引用，则函数执行完之后，在函数外打印的是该引用所执行的内存空间改变的结果。</li>
+</ul>
+<p>普通方法、实例方法、类方法和静态方法：</p>
+<ul>
+<li>普通方法：在一个Python环境中，独立于类或者对象的函数，可直接导入文件中的方法直接使用。</li>
+<li>实例方法：类中定义，使用之前先通过类实例化一个对象，然后在通过对象调用实例方法。与c++类似。实例方法的第一个参数默认传入一个self，这个self会与实例绑定。</li>
+<li>类方法：与实例方法的调用方式类似，不同的是类方法第一个参数默认传入一个类cls，而不是对象。</li>
+<li>静态方法：对于静态方法其实和普通的方法一样，不需要对谁进行绑定，唯一的区别是调用的时候需要使用a.static_foo(x)或者A.static_foo(x)来调用.</li>
+<li>静态方法修饰：@staticmethod</li>
+<li>类方法修饰：@classmethod</li>
+</ul>
+<p>类属性和实例属性：</p>
+<ul>
+<li>类属性就是供类使用的属性，实例属性就是供实例使用的属性。</li>
+<li>由于Python是动态语言，根据类创建的实例可以任意绑定属性。给实例绑定属性的方法是通过实例变量，或者通过self变量</li>
+<li>定义了一个类属性后，这个属性虽然归类所有，但类的所有实例都可以访问到。</li>
+<li>不要对实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当删除实例属性后，再使用相同的名称，访问到的将是类属性。</li>
+</ul>
+<h1 id="Python自省"><a href="#Python自省" class="headerlink" title="Python自省"></a>Python自省</h1><p>自省就是面向对象的语言所写的程序在运行时，所能知道对象的类型。简单一句就是运行时能够获得对象的类型。比如type()，dir()，getattr()，hasattr()，isinstance()。</p>
+<h1 id="推导式（列表推导式、字典推导式、集合推导式）"><a href="#推导式（列表推导式、字典推导式、集合推导式）" class="headerlink" title="推导式（列表推导式、字典推导式、集合推导式）"></a>推导式（列表推导式、字典推导式、集合推导式）</h1><p>推导式comprehensions（又称解析式），是Python的一种独有特性。推导式是可以从一个数据序列构建另一个新的数据序列的结构体。共有三种推导，在Python2和3中都有支持：</p>
+<ul>
+<li>列表(list)推导式：<code>[out_exp_res for out_exp in input_list if out_exp == 2]</code>  将列表推导式的 [] 改成 () 即可得到生成器。</li>
+<li>字典(dict)推导式：<code>&#123;v: k for k，v in mcase.items()&#125;</code></li>
+<li>集合(set)推导式：<code>&#123;x**2 for x in [1，1，2]&#125;</code></li>
+</ul>
+<h1 id="生成器generator"><a href="#生成器generator" class="headerlink" title="生成器generator"></a>生成器generator</h1><p>通过列表生成式，可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。所以，如果列表元素可以按照某种算法推算出来，这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器：generator。要创建一个generator，有很多种方法。</p>
+<ul>
+<li>第一种方法很简单，只要把一个列表生成式的[]改成()，就创建了一个generator。如果要一个一个打印出来，可以通过next()函数获得generator的下一个返回值，但正确的方法是使用for循环，因为generator也是可迭代对象。</li>
+<li>第二种方法，生成器函数。如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator。generator和函数的执行流程不一样。函数是顺序执行，遇到return语句或者最后一行函数语句就返回。而generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。</li>
+</ul>
+<h1 id="单下划线和双下划线"><a href="#单下划线和双下划线" class="headerlink" title="单下划线和双下划线"></a>单下划线和双下划线</h1><ul>
+<li><code>__foo__</code>：一种约定，Python内部的名字，用来区别其他用户自定义的命名，以防冲突。</li>
+<li><code>_foo</code>：一种约定，程序员用来指定私有变量的一种方式。</li>
+<li><code>__foo</code>：解析器用_classname__foo来代替这个名字，以区别和其他类相同的命名。</li>
+</ul>
+<h1 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h1><p>%和format函数格式化的用法。format在许多方面看起来更便利，对于%最烦人的是它无法同时传递一个变量和元组。</p>
+<h1 id="args-and-kwargs-可变参数"><a href="#args-and-kwargs-可变参数" class="headerlink" title="*args and **kwargs(可变参数)"></a><code>*args and **kwargs(可变参数)</code></h1><p>用<code>*args和**kwargs</code>只是为了方便并没有强制使用它们。当不确定你的函数里将要传递多少参数时可以用*args(其是可迭代对象)；**kwargs是字典。</p>
+<h1 id="变量解包"><a href="#变量解包" class="headerlink" title="变量解包"></a>变量解包</h1><ul>
+<li><code>*</code> - 可以解包可迭代对象。foo(*iter)</li>
+<li><code>**</code> - 可以解包字典。foo(**dict)</li>
+</ul>
+<h1 id="编写函数的4个原则"><a href="#编写函数的4个原则" class="headerlink" title="编写函数的4个原则"></a>编写函数的4个原则</h1><ul>
+<li>函数的设计要尽量短小，嵌套层次不宜过深。</li>
+<li>函数名能够正确反映它的大概作用，参数的设计也应该简单明了。</li>
+<li>函数的设计应该考虑向下兼容。</li>
+<li>一个函数只做一件事，尽量保证函数语句粒度的一致性。</li>
+</ul>
+<p>python是动态语言，支持的常量很少很少，只有简单的True、False、None等。</p>
+<ul>
+<li>通过命名风格来提醒使用者该变量代表的意义为常量，如全部大写。</li>
+<li>通过自定义类来实现常量功能。</li>
+</ul>
+<h1 id="assert断言"><a href="#assert断言" class="headerlink" title="assert断言"></a>assert断言</h1><p>断言是有代价的，它会对性能产生一定的影响。对于编译性语言，像C/C++，这也许并不重要，因为断言只在调试模式下生效。但python并没有严格的调试和发布模式，通常禁用断言的方法是在运行脚本的时候加上-O标识，这种方式影响是它并不优化字节码，而是忽略与断言相关的语句。assert断言实际被设计用来捕获用户所定义的约束的，而不是用来捕获程序本身错误的，因此使用断言需要注意以下几点：</p>
+<ul>
+<li>不要滥用，这是断言最基本的原则。若由断言引发了异常，通常代表程序中存在bug。因此断言应该用在正常逻辑不可到达的地方或正常情况下总是为真的场合。</li>
+<li>如果python本身异常能够处理就不要使用断言，如数组越界、类型不匹配、除数为0之类的错误。</li>
+<li>不要使用断言来检查用户的输入。</li>
+<li>在函数调用后，当需要确认返回值是否合理时可以使用断言。</li>
+<li>当条件是业务逻辑继续下去的先决条件时可以使用断言。</li>
+</ul>
+<h1 id="数据交换的时候不推荐使用中间变量"><a href="#数据交换的时候不推荐使用中间变量" class="headerlink" title="数据交换的时候不推荐使用中间变量"></a>数据交换的时候不推荐使用中间变量</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func_10</span>():</span></span><br><span class="line">    <span class="comment"># 斐波拉契数列，生成器函数，按需索取</span></span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a + b</span><br></pre></td></tr></table></figure>
+<h1 id="充分利用Lazy-evaluation的特性-生成器，延迟计算-："><a href="#充分利用Lazy-evaluation的特性-生成器，延迟计算-：" class="headerlink" title="充分利用Lazy evaluation的特性(生成器，延迟计算)："></a>充分利用Lazy evaluation的特性(生成器，延迟计算)：</h1><p>列表推导式：lis = [x/2 for x in range(5000000)]</p>
+<p>生成器（延迟计算）：gen = (x/2 for x in range(5000000))</p>
+<h1 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">divby2</span>(<span class="params">n</span>):</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> num &lt; n:</span><br><span class="line">        <span class="keyword">yield</span> num/<span class="number">2</span></span><br><span class="line">        num += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>注意：小心yield的无限循环。</p>
+<p>基本上，一个生成器允许返回一个类似列表的结构，但这里有一些区别：</p>
+<ul>
+<li>列表存储创建时的所有元素。而生成器在需要时生成下一个元素。</li>
+<li>列表可以无限次遍历，而生成器只能尽可能准确地迭代一次。</li>
+<li>一个列表可以通过索引获取元素，而生成器不能，它从头到尾只产生一次值。</li>
+</ul>
+<h1 id="and和or的截断"><a href="#and和or的截断" class="headerlink" title="and和or的截断"></a>and和or的截断</h1><ul>
+<li>x and y：如果x为假，那么表达式就为假，不再计算y。</li>
+<li>x or y：如果x为真，那么表达式就为真，不再计算y。</li>
+</ul>
+<h1 id="判断类型"><a href="#判断类型" class="headerlink" title="判断类型"></a>判断类型</h1><p>不推荐使用type来进行类型检查，并不能准确地返回结果。推荐使用isinstance函数。</p>
+<h1 id="浮点计算"><a href="#浮点计算" class="headerlink" title="浮点计算"></a>浮点计算</h1><p>尽量转换成浮点类型后再做除法，对于浮点数的处理，其计算结果并不是完全准确的。如果计算精度要求较高，可以使用Decimal来进行处理或者将浮点数尽量扩大为整数，计算完毕后再转换回去。</p>
+<p>**警惕eval()的安全漏洞(执行任意代码)**，其可以将字符串str当成有效的表达式来求值并返回计算结果。其和exec差不多，一般用于动态调用。</p>
+<h1 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate()"></a>enumerate()</h1><p>使用enumerate()获取序列迭代的索引值。</p>
+<h1 id="分清-与is的适用场景"><a href="#分清-与is的适用场景" class="headerlink" title="分清==与is的适用场景"></a>分清==与is的适用场景</h1><p>Python中对象包含的三个基本要素，分别是：id(身份标识)、type(数据类型)和value(值)。is和==都是对对象进行比较判断作用的，但对对象比较判断的内容并不相同。</p>
+<ul>
+<li>==比较操作符(比较判断两个对象的value(值)是否相等)</li>
+<li>is同一性运算符(比较判断的是对象间的唯一身份标识，也就是id是否相同)</li>
+</ul>
+<p>==实际上是调用的<strong>eq</strong>()方法，因此a==b实际是调用的a.<strong>eq</strong>(b)，所以==可以被重载，但是is不行。一般情况下，如果x is y是True，那么x == y也是True(特殊情况除外，如NaN; a=float(‘NaN’), 虽然a is a为True，但a == a为False)，反之则不然。</p>
+<h1 id="考虑兼容性"><a href="#考虑兼容性" class="headerlink" title="考虑兼容性"></a>考虑兼容性</h1><p>尽可能使用unicode。在python3中，统一为了unicode，只有byte和string两种类型。</p>
+<h1 id="构建合理的包层次来管理module"><a href="#构建合理的包层次来管理module" class="headerlink" title="构建合理的包层次来管理module"></a>构建合理的包层次来管理module</h1><p>在包目录下有一个<code>__init__.py</code>文件，一般这个文件为空。可以在该文件中申明模块级别的import语句，从而使其变成包级别可见。<code>__init__.py</code>文件还有一个作用就是通过在该文件中定义<strong>all</strong>.py变量，控制需要导入的子包或者模块。</p>
+<h1 id="python提供了三种方式来导入外部模块"><a href="#python提供了三种方式来导入外部模块" class="headerlink" title="python提供了三种方式来导入外部模块"></a>python提供了三种方式来导入外部模块</h1><p>import语句、from…import…及__import__函数。__import__函数与import语句类似，不同点在于前者显式地将模块的名称作为字符串传递并赋值给命名空间的变量。在导入模块的时候，尽量遵循以下几点：</p>
+<ul>
+<li>一般情况下优先使用import a形式。</li>
+<li>有节制地使用from a import B形式。</li>
+<li>尽量避免使用from a import *，因为这会污染命名空间，并且无法清晰地表示导入了哪些对象。</li>
+</ul>
+<p>python在初始化运行环境的时候会预先加载一批内建模块到内存中，这些模块相关的信息被存放在sys.modules中。当加载一个模块时，解释器实际上要完成以下动作：</p>
+<ul>
+<li>在sys.modules中搜索看看该模块是否已经存在，如果存在，则将其导入到当前局部命名空间，加载结束。</li>
+<li>如果在sys.modules中找不到对应模块的名称，则为需要导入的模块创建一个字典对象，并将该对象信息插入sys.modules中。</li>
+<li>加载前确认是否需要对模块对应的文件进行编译，如果需要则先进行编译。</li>
+<li>执行动态加载，在当前模块的命名空间中执行编译后的字节码，并将其中所有的对象放入模块对应的字典中。</li>
+</ul>
+<p>注意：直接使用import和使用from a import B形式这两者之间存在一定的差异，后者直接将B暴露于当前局部空间，并将a加载到sys.modules集合。</p>
+<p>无节制地使用from a import *会导致一些问题：</p>
+<ul>
+<li>命名空间的冲突</li>
+<li>循环嵌套导入的问题</li>
+</ul>
+<p>优先使用absolute import来导入模块，即绝对路径导入。</p>
+<h1 id="i-1不等于i-i-1"><a href="#i-1不等于i-i-1" class="headerlink" title="i+=1不等于i=i+1"></a>i+=1不等于i=i+1</h1><p>增强赋值语句比普通赋值语句的效率更高，这是因为在 Python 源码中，增强赋值比普通赋值多了写回的功能，也就是说增强赋值在条件符合的情况下会以追加的方式来进行处理，而普通赋值则会以新建的方式进行处理。</p>
+<h1 id="1和–1"><a href="#1和–1" class="headerlink" title="++1和–1"></a>++1和–1</h1><p>python不支持后自增(减)操作(1++/1–)，只支持前自增(减)操作，但是python仅仅把它认为是正负号的叠加使用，而不会去真正的进行加减操作。</p>
+<h1 id="使用with自动关闭资源"><a href="#使用with自动关闭资源" class="headerlink" title="使用with自动关闭资源"></a>使用with自动关闭资源</h1><p>with支持嵌套，支持多个with子句，它们两者之间可以互相转换。with代码块的执行过程如下：</p>
+<ul>
+<li>计算表达式的值，返回一个上下文管理器对象。</li>
+<li>加载上下文管理器对象的<strong>exit</strong>()方法以备后用。</li>
+<li>调用上下文管理器对象的<strong>enter</strong>()方法。</li>
+<li>如果with语句中设置了目标对象，则将<strong>enter</strong>()方法的返回值赋给目标对象。</li>
+<li>执行with中的代码块。</li>
+<li>如果步骤5中的代码正常结束，调用上下文管理器对象的<strong>exit</strong>()方法，其返回值直接忽略。</li>
+<li>如果步骤5中代码执行过程中发生异常，调用上下文管理器对象的<strong>exit</strong>()方法，并将其异常类型、值及traceback信息作为参数传递给<strong>exit</strong>()方法。如果<strong>exit</strong>()返回值为false，则异常被重新抛出；如果为true，异常被挂起，程序继续执行。</li>
+</ul>
+<h1 id="上下文管理器协议"><a href="#上下文管理器协议" class="headerlink" title="上下文管理器协议"></a>上下文管理器协议</h1><ul>
+<li><code>__enter__()</code>：进行运行时的上下文，返回其运行时上下文相关的对象，with语句中会将这个返回值绑定到目标对象。</li>
+<li><code>__exit__(exception_type，exception_value，traceback)</code>：退出运行时的上下文，定义在块执行(或终止)之后上下文管理器应该做什么。它可以处理异常、清理现场或者处理with块中语句执行完成之后需要处理的动作。</li>
+</ul>
+<p>可以直接使用contextlib中的contextmanager作为装饰器来提供一种针对函数级别上的上下文管理机制，可以直接作用于函数/对象上。</p>
+<h1 id="使用else子句简化循环-异常处理"><a href="#使用else子句简化循环-异常处理" class="headerlink" title="使用else子句简化循环(异常处理)"></a>使用else子句简化循环(异常处理)</h1><p>else还可以用在循环中，在for/while中，如果循环没有break跳出语句或者没有正常执行完，那么else子句将会被执行。</p>
+<h1 id="异常处理的几点基本原则"><a href="#异常处理的几点基本原则" class="headerlink" title="异常处理的几点基本原则"></a>异常处理的几点基本原则</h1><ul>
+<li>注意异常的粒度，不推荐在try块中放入过多的代码。</li>
+<li>谨慎使用except语句处理所有的异常，最好能定位具体的异常。</li>
+<li>注意异常捕获的顺序，在合适的层次处理异常。推荐的方法是将继承机构中子类异常在前面的except语句中抛出，而父类异常在后面的except语句中抛出。</li>
+</ul>
+<p>另外，如果异常能够在被捕获的位置处理，那么就应该及时处理，不能处理的也应该以合适的方式向上层抛出。遇到异常不论好歹就向上抛出是不明智的。向上层抛出异常的时候需要注意异常丢失的情况，可以使用不带参数的raise来传递。使用更为友好的异常，遵循异常参数规范。给用户看的异常一定要是用户能明白的异常。</p>
+<h1 id="避免finally中可能发生的陷阱"><a href="#避免finally中可能发生的陷阱" class="headerlink" title="避免finally中可能发生的陷阱"></a>避免finally中可能发生的陷阱</h1><p>因为当try块中发生异常的时候，如果在except语句中找不到对应的异常处理，异常将被保存起来。当finally执行完毕的时候，临时保存的异常将会再次被抛出。但是如果finally中产生了新的异常或者执行了break或者return语句，那么临时保存的异常将会丢失，从而导致异常的丢失。</p>
+<h1 id="深入理解None，正确判断对象是否为空"><a href="#深入理解None，正确判断对象是否为空" class="headerlink" title="深入理解None，正确判断对象是否为空"></a>深入理解None，正确判断对象是否为空</h1><p>None表示空对象，而空值(空字符串””，0，空列表[]，空字典{}，空元组())是Python里一个特殊的值，用None表示。</p>
+<h1 id="nonzero-方法"><a href="#nonzero-方法" class="headerlink" title="nonzero()方法"></a><strong>nonzero</strong>()方法</h1><p>对自身对象进行空值测试，返回0/1或者True/False。如果一个对象没有定义该方法，python取<code>__len__()</code>方法调用的结果来进行判断。<code>__len__()</code>返回0则表示空。如果一个类中既没有定义<strong>nonzero</strong>()也没有定义<strong>len</strong>()方法，该类的实例用if判断都是True。在python3中移除了<strong>nonzero</strong>()方法，并使用<strong>bool</strong>()替代。</p>
+<h1 id="连接字符串应优先使用join而不是"><a href="#连接字符串应优先使用join而不是" class="headerlink" title="连接字符串应优先使用join而不是+"></a>连接字符串应优先使用join而不是+</h1><p>用操作符+连接字符串的时候，由于字符串是不可变对象，其工作原理是这样的：如果要连接S1+S2+…+Sn，执行一次+操作便会在内存中申请一块新的内存，并将上一次操作的结果和本次操作的右操作数复制到新申请的内存中。即当S1+S2的时候会申请一块内存，并将S1、S2复制到该内存中。依此类推，相当于S1被复制了n-1次，S2被复制n-2次…Sn被复制1次(并不完全等同于S1复制n-1次，因为后续复制都是对中间结果的复制)，所以字符串的连接时间约为<code>s*n^2</code>，其中s为复制依此字符串的平均时间。而用join()的时候，计算机直接计算需要申请的总内存空间，然后一次性申请那么多并将字符序列中的每一个元素复制到内存中去，所以join操作的时间约为<code>s*n</code>。</p>
+<h1 id="格式化字符串尽量使用format-方式，而不是"><a href="#格式化字符串尽量使用format-方式，而不是" class="headerlink" title="格式化字符串尽量使用format()方式，而不是%"></a>格式化字符串尽量使用format()方式，而不是%</h1><p>format的基本语法是：<code>[[填充符] 对齐方式] [符号] [#] [0][宽度][，][.精确值][转换类型]</code></p>
+<p>其中填充符可以是除了{、}符号之外的任意符号。</p>
+<h2 id="对齐方式："><a href="#对齐方式：" class="headerlink" title="对齐方式："></a>对齐方式：</h2><ul>
+<li><code>&lt;</code>    表示左对齐，大多数对象为默认的对齐方式。</li>
+<li><code>&gt;</code>    表示右对齐，数值默认的对齐方式。</li>
+<li><code>=</code>    仅对数值型有效，如果有符号的话，在符号后数值前进行填充，如-000029。</li>
+<li><code>^</code>    居中对齐，用空格进行填充。</li>
+</ul>
+<h2 id="符号："><a href="#符号：" class="headerlink" title="符号："></a>符号：</h2><ul>
+<li><code>+</code>       正数前加+，负数前加-。</li>
+<li><code>-</code>       正数前不加符号，负数前加-，为数值的默认形式。</li>
+<li><code>空格</code>    正数前加空格，负数前加-。</li>
+</ul>
+<h1 id="区别对待可变对象和不可变对象"><a href="#区别对待可变对象和不可变对象" class="headerlink" title="区别对待可变对象和不可变对象"></a>区别对待可变对象和不可变对象</h1><p>python一切皆对象，每一个对象都有一个唯一的标识符、类型以及值。对象根据其值是否能修改分为可变对象和不可变对象。其中数字、字符串、元组属于不可变对象，字典、列表和数组属于可变对象。</p>
+<p>**[]、{}和()**：一致的容器初始化形式。</p>
+<p>注意：函数传参既不是传值也不是传引用。正确的叫法应该是叫传对象或传对象引用。函数参数在传递过程中将整个对象传入，对可变对象的修改在函数外部以及内部可见，调用者和被调用者之间共享这个对象。而对于不可变对象，由于并不能被真正被修改，因此，修改往往是通过生成一个新对象然后赋值来实现。</p>
+<h1 id="警惕默认参数潜在的问题"><a href="#警惕默认参数潜在的问题" class="headerlink" title="警惕默认参数潜在的问题"></a>警惕默认参数潜在的问题</h1><p>def在python中是一个可执行语句，当解释器执行def的时候，默认参数也会被计算。在代码编译成PyCodeObject的时候，就已经创建了对象指针，并且存在该函数的func_default内。 以后在代码运行，调用函数的时候，如果没有指定参数的话，并且修改了参数的值，则每次调用该函数时其参数变量都是代码编译阶段的变量指针所指定的对象(即已改变)。</p>
+<p>所以定义默认参数要牢记一点：默认参数必须指向不变对象！可用None这个不变对象来实现。</p>
+<h1 id="慎用变长参数"><a href="#慎用变长参数" class="headerlink" title="慎用变长参数"></a>慎用变长参数</h1><p>定义可变参数和定义一个list或tuple参数相比，仅仅在参数前面加了一个<code>*</code>号。Python允许在list或tuple前面加一个*号，把list或tuple的元素变成可变参数传进函数中。可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。</p>
+<h1 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h1><p>关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。同样可以在字典前加一个**号，把字典元素变成关键字参数传进函数中。注意，函数获得的仅是一份拷贝。</p>
+<h1 id="命名关键字参数"><a href="#命名关键字参数" class="headerlink" title="命名关键字参数"></a>命名关键字参数</h1><p>和关键字参数<code>**kw</code>不同，命名关键字参数需要一个特殊分隔符<code>*</code>，<code>*</code>后面的参数被视为命名关键字参数。如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了。命名关键字参数必须传入参数名，这和位置参数不同，如果没有传入参数名，调用将报错。命名关键字参数可以有缺省值(有默认值)，从而简化调用。使用命名关键字参数时，要特别注意，如果没有可变参数，就必须加一个<code>*</code>作为特殊分隔符。如果缺少<code>*</code>，Python解释器将无法识别位置参数和命名关键字参数。</p>
+<h1 id="参数组合"><a href="#参数组合" class="headerlink" title="参数组合"></a>参数组合</h1><p>在Python中定义函数，可以用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
+<h1 id="str-和repr-的区别"><a href="#str-和repr-的区别" class="headerlink" title="str()和repr()的区别"></a>str()和repr()的区别</h1><ul>
+<li>两者之间的目标不同：str()主要面向用户，其目的是可读性，返回形式为用户友好性和可读性都较强的字符串类型；而repr()面向的是python解释器，或者说开发人员，其目的是准确性，其返回值表示python解释器内部的含义，常作为编程人员debug用途。</li>
+<li>在解释器中直接输入a时默认调用repr()函数，而print(a)则调用str()函数。</li>
+<li>repr()的返回值一般可以用eval()函数来还原对象，通常有如下等式：obj == eval(repr(obj))但它并不是在所有情况下都成立，比如用户重新实现了repr()。</li>
+<li>这两个方法分别调用内建的<strong>str</strong>()和<strong>repr</strong>()方法，一般来说在类中都应该定义<strong>repr</strong>()方法，而<strong>str</strong>()方法则为可选，当可读性比准确性更为重要的时候应该考虑定义<strong>str</strong>()方法。如果类中没有定义<strong>str</strong>()方法，则默认会使用<strong>repr</strong>()方法的结果来返回对象的字符串表示形式。用户返回<strong>repr</strong>()方法的时候最好保证其值可以用eval()方法使对象重新还原。</li>
+</ul>
+<h1 id="分清classmethod和staticmethod的适用场景"><a href="#分清classmethod和staticmethod的适用场景" class="headerlink" title="分清classmethod和staticmethod的适用场景"></a>分清classmethod和staticmethod的适用场景</h1><p>||实例方法|类方法|静态方法|<br>|:-|:-|:-|:-|<br>|a = A()|a.foo(x)|a.class_foo(x)|a.static_foo(x)|<br>|A|不可用|A.class_foo(x)|A.static_foo(x)|</p>
+<p>在Python中，静态方法和类方法都是可以通过类对象和类对象实例访问。区别是：类方法的第一个参数是cls，而实例方法的第一个参数是self，表示该类的一个实例。实例方法至少需要一个self参数，代表类对象实例。类方法有类变量cls传入，从而可以用cls做一些相关的处理。并且有子类继承时，调用该类方法时，传入的类变量cls是子类，而非父类。对于类方法，可以通过类来调用，也可以通过类的一个实例来调用。而静态方法则没有，它基本上跟一个全局函数相同。</p>
+<h1 id="staticmethod静态方法"><a href="#staticmethod静态方法" class="headerlink" title="staticmethod静态方法"></a>staticmethod静态方法</h1><ul>
+<li>静态方法定义在类中，较之外部函数，能够更加有效地将代码组织起来，从而使相关代码的垂直距离更近，提高代码的维护性。</li>
+<li>如果有一组独立的方法，将其定义在一个模块中，通过模块来访问这些方法也是一个不错的选择。</li>
+<li>经常有一些跟类有关系的功能但在运行时又不需要实例和类参与的情况下需要用到静态方法。</li>
+</ul>
+<h1 id="classmethod类方法"><a href="#classmethod类方法" class="headerlink" title="classmethod类方法"></a>classmethod类方法</h1><p>类方法的调用使用类本身作为其隐含参数，但调用本身并不需要显式提供该参数。在继承时动态地生成了对应类的类变量，这就是classmethod的妙用。</p>
+<h1 id="property属性"><a href="#property属性" class="headerlink" title="property属性"></a>property属性</h1><p>一种用起来像是使用的实例属性一样的特殊属性，可以对应于某个方法。单独使用时其一般用于获取只读属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Goods</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 原价</span></span><br><span class="line">        self.original_price = <span class="number">100</span></span><br><span class="line">        <span class="comment"># 折扣</span></span><br><span class="line">        self.discount = <span class="number">0.8</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">price</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 实际价格 = 原价 * 折扣</span></span><br><span class="line">        new_price = self.original_price * self.discount</span><br><span class="line">        <span class="keyword">return</span> new_price</span><br><span class="line"></span><br><span class="line"><span class="meta">    @price.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">price</span>(<span class="params">self, value</span>):</span></span><br><span class="line">        self.original_price = value</span><br><span class="line"></span><br><span class="line"><span class="meta">    @price.deleter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">price</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">del</span> self.original_price</span><br><span class="line"></span><br><span class="line">obj = Goods()</span><br><span class="line">obj.price         <span class="comment"># 获取商品价格</span></span><br><span class="line">obj.price = <span class="number">200</span>   <span class="comment"># 修改商品原价</span></span><br><span class="line"><span class="keyword">del</span> obj.price     <span class="comment"># 删除商品原价</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这种装饰器都是可以使用函数形式的</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_bar</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;getter...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;laowang&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_bar</span>(<span class="params">self, value</span>):</span> </span><br><span class="line">        <span class="string">&quot;&quot;&quot;必须两个参数&quot;&quot;&quot;</span></span><br><span class="line">        print(<span class="string">&quot;setter...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;set value&#x27;</span> + value</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_bar</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;deleter...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;laowang&#x27;</span></span><br><span class="line"></span><br><span class="line">    BAR = <span class="built_in">property</span>(get_bar, set_bar, del_bar, <span class="string">&quot;description...&quot;</span>)</span><br><span class="line"></span><br><span class="line">obj = Foo()</span><br><span class="line">obj.BAR  <span class="comment"># 自动调用第一个参数中定义的方法：get_bar</span></span><br><span class="line">obj.BAR = <span class="string">&quot;alex&quot;</span>  <span class="comment"># 自动调用第二个参数中定义的方法：set_bar方法，并将“alex”当作参数传入</span></span><br><span class="line">Foo.BAR.__doc__  <span class="comment"># 自动获取第四个参数中设置的值：description...</span></span><br><span class="line"><span class="keyword">del</span> obj.BAR  <span class="comment"># 自动调用第三个参数中定义的方法：del_bar方法</span></span><br></pre></td></tr></table></figure>
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/luchsun">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BenRmy">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://benrmy.github.io/">Rmy&#39;s Page</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hexo自建博客">
+    <meta name="keyword"  content="python 爬虫 rmy">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        函数概念 - Rmy的博客 | Rmy&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 大道甚夷,而人好径,终为所误 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rmy</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0"><span class="toc-text">定义一个函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-text">函数调用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-text">参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B"><span class="toc-text">不可变类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E7%B1%BB%E5%9E%8B"><span class="toc-text">可变类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-text">匿名函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#return%E8%AF%AD%E5%8F%A5"><span class="toc-text">return语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-text">全局变量和局部变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#global-%E5%92%8C-nonlocal%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">global 和 nonlocal关键字</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 大道甚夷,而人好径,终为所误 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        函数概念
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-03-12 15:31:15</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。</p>
+<h1 id="定义一个函数"><a href="#定义一个函数" class="headerlink" title="定义一个函数"></a>定义一个函数</h1><ul>
+<li>函数代码块以 def 关键词开头，后接函数标识符名称和圆括号 ()。</li>
+<li>任何传入参数和自变量必须放在圆括号中间，圆括号之间可以用于定义参数。</li>
+<li>函数的第一行语句可以选择性地使用文档字符串,用于存放函数说明。</li>
+<li>函数内容以冒号起始，并且缩进。</li>
+<li><code>return [表达式]</code> 结束函数，选择性地返回一个值给调用方。不带表达式的return相当于返回 None。</li>
+</ul>
+<h1 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h1><ul>
+<li>有参数就传入参数，后面加上括号即是调用。</li>
+<li>*用于解包序列参数，**用于解包字典参数。</li>
+<li>函数在python中是一等公民，可以当作参数传递。</li>
+</ul>
+<h1 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h1><p>在 python 中，类型属于对象，变量是没有类型的，其仅仅是对象的引用(一个指针)。在 python 中，strings，tuples，和 numbers 是不可更改的对象，而 list，dict 等则是可以修改的对象。</p>
+<h2 id="不可变类型"><a href="#不可变类型" class="headerlink" title="不可变类型"></a>不可变类型</h2><p>类似 c++ 的值传递，如整数、字符串、元组。如fun(a)，传递的只是a的值，没有影响a对象本身。比如在 fun(a)内部修改 a 的值，只是修改另一个复制的对象，不会影响 a 本身。</p>
+<h2 id="可变类型"><a href="#可变类型" class="headerlink" title="可变类型"></a>可变类型</h2><p>类似 c++ 的引用传递，如列表，字典。如 fun(la)，则是将 la 真正的传过去，修改后fun外部的la也会受影响。</p>
+<blockquote>
+<p>python 中一切都是对象，严格意义不能说值传递还是引用传递，应该说传不可变对象和传可变对象。</p>
+</blockquote>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><ul>
+<li>必需参数：必需参数须以正确的顺序传入函数，调用时的数量必须和声明时的一样。</li>
+<li>关键字参数：函数调用使用关键字参数来确定传入的参数值，参数顺序和声明可以不同。</li>
+<li>默认参数：调用函数时，如果没有传递参数，则会使用默认参数。</li>
+<li>不定长参数：星号(*)的变量名会存放所有未命名的变量参数。</li>
+</ul>
+<h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><p>python 使用 lambda 来创建匿名函数。所谓匿名，意即不再使用 def 语句这样标准的形式定义一个函数。有以下特性：</p>
+<ul>
+<li>lambda 只是一个表达式，函数体比 def 简单很多。</li>
+<li>lambda的主体是一个表达式，而不是一个代码块。仅仅能在lambda表达式中封装有限的逻辑进去。</li>
+<li>lambda 函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数。</li>
+<li>虽然lambda函数看起来只能写一行，却不等同于C或C++的内联函数，后者的目的是调用小函数时不占用栈内存从而增加运行效率。</li>
+<li>lambda 函数的语法只包含一个语句：lambda [arg1 [，arg2，…..argn]]:expression</li>
+</ul>
+<h1 id="return语句"><a href="#return语句" class="headerlink" title="return语句"></a>return语句</h1><p><code>return [表达式]</code> 语句用于退出函数，选择性地向调用方返回一个表达式。不带参数值的return语句返回None。</p>
+<h1 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h1><p>变量的作用域决定了在哪一部分程序可以访问哪个特定的变量名称。Python的作用域一共有4种，分别是：</p>
+<ul>
+<li>L (Local) 局部作用域</li>
+<li>E (Enclosing) 闭包函数外的函数中</li>
+<li>G (Global) 全局作用域：g_count = 0</li>
+<li>B (Built-in) 内建作用域：x = int(2.9)</li>
+</ul>
+<p>以 L -&gt; E -&gt; G -&gt;B 的规则查找，即：在局部找不到，便会去局部外的局部找(例如闭包)，再找不到就会去全局找，再者去内建中找。</p>
+<p><strong>注意</strong>：只有模块(module)，类(class)以及函数(def、lambda)才会引入新的作用域，其它的代码块(如 if/elif/else/、try/except、for/while等)是不会引入新的作用域的，也就是说这这些语句内定义的变量，外部也可以访问。</p>
+<h1 id="全局变量和局部变量"><a href="#全局变量和局部变量" class="headerlink" title="全局变量和局部变量"></a>全局变量和局部变量</h1><p>定义在函数内部的变量拥有一个局部作用域，定义在函数外的拥有全局作用域。局部变量只能在其被声明的函数内部访问，而全局变量可以在整个程序范围内访问。调用函数时，所有在函数内声明的变量名称都将被加入到局部作用域中。</p>
+<h1 id="global-和-nonlocal关键字"><a href="#global-和-nonlocal关键字" class="headerlink" title="global 和 nonlocal关键字"></a>global 和 nonlocal关键字</h1><p>当内部作用域想修改外部作用域的变量时，就要用到global和nonlocal关键字。如果要修改嵌套作用域(enclosing 作用域，外层非全局作用域)中的变量则需要 nonlocal 关键字(比如闭包中)。</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/luchsun">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BenRmy">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://benrmy.github.io/">Rmy&#39;s Page</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

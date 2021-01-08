@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hexo自建博客">
+    <meta name="keyword"  content="python 爬虫 rmy">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        数值计算 - Rmy的博客 | Rmy&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 大道甚夷,而人好径,终为所误 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rmy</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">Python算术运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">Python赋值运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">Python位运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">Python逻辑运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E6%88%90%E5%91%98%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">Python成员运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">Python身份运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">Python运算符优先级</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 大道甚夷,而人好径,终为所误 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        数值计算
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-02-08 11:13:02</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>Python3 数值计算包括：操作数和操作符</p>
+<h2 id="Python算术运算符"><a href="#Python算术运算符" class="headerlink" title="Python算术运算符"></a>Python算术运算符</h2><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">+</td>
+<td align="left">加 - 两个对象相加</td>
+<td align="left">a + b 输出结果 31</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">减 - 得到负数或是一个数减去另一个数</td>
+<td align="left">a - b 输出结果 -11</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">乘 - 两个数相乘或是返回一个被重复若干次的字符串</td>
+<td align="left">a * b 输出结果 210</td>
+</tr>
+<tr>
+<td align="left">/</td>
+<td align="left">除 - x 除以 y</td>
+<td align="left">b / a 输出结果 2.1</td>
+</tr>
+<tr>
+<td align="left">%</td>
+<td align="left">取模 - 返回除法的余数</td>
+<td align="left">b % a 输出结果 1</td>
+</tr>
+<tr>
+<td align="left"><code>**</code></td>
+<td align="left">幂 - 返回x的y次幂</td>
+<td align="left">a<code>**</code>b 为10的21次方</td>
+</tr>
+<tr>
+<td align="left">//</td>
+<td align="left">取整除 - 返回商的整数部分</td>
+<td align="left">9//2 输出结果 4 ，9.0//2.0 输出结果 4.0</td>
+</tr>
+</tbody></table>
+<h2 id="Python赋值运算符"><a href="#Python赋值运算符" class="headerlink" title="Python赋值运算符"></a>Python赋值运算符</h2><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">=</td>
+<td align="left">简单的赋值运算符</td>
+<td align="left">c = a + b 将 a + b 的运算结果赋值为 c</td>
+</tr>
+<tr>
+<td align="left">+=</td>
+<td align="left">加法赋值运算符</td>
+<td align="left">c += a 等效于 c = c + a</td>
+</tr>
+<tr>
+<td align="left">-=</td>
+<td align="left">减法赋值运算符</td>
+<td align="left">c -= a 等效于 c = c - a</td>
+</tr>
+<tr>
+<td align="left">*=</td>
+<td align="left">乘法赋值运算符</td>
+<td align="left">c *= a 等效于 c = c * a</td>
+</tr>
+<tr>
+<td align="left">/=</td>
+<td align="left">除法赋值运算符</td>
+<td align="left">c /= a 等效于 c = c / a</td>
+</tr>
+<tr>
+<td align="left">%=</td>
+<td align="left">取模赋值运算符</td>
+<td align="left">c %= a 等效于 c = c % a</td>
+</tr>
+<tr>
+<td align="left"><code>**=</code></td>
+<td align="left">幂赋值运算符</td>
+<td align="left"><code>c **= a 等效于 c = c ** a</code></td>
+</tr>
+<tr>
+<td align="left">//=</td>
+<td align="left">取整除赋值运算符</td>
+<td align="left">c //= a 等效于 c = c // a</td>
+</tr>
+</tbody></table>
+<h2 id="Python位运算符"><a href="#Python位运算符" class="headerlink" title="Python位运算符"></a>Python位运算符</h2><p>按位运算符是把数字看作二进制来进行计算的。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&amp;</td>
+<td align="left">按位与运算符：参与运算的两个值，如果两个相应位都为1，则该位的结果为1，否则为0</td>
+<td align="left">(a &amp; b) 输出结果 12 ，二进制解释： 0000 1100</td>
+</tr>
+<tr>
+<td align="left">`</td>
+<td align="left">`</td>
+<td align="left">按位或运算符：只要对应的二个二进位有一个为1时，结果位就为1。</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">按位异或运算符：当两对应的二进位相异时，结果为1</td>
+<td align="left">(a ^ b) 输出结果 49 ，二进制解释： 0011 0001</td>
+</tr>
+<tr>
+<td align="left">~</td>
+<td align="left">按位取反运算符：对数据的每个二进制位取反，即把1变为0，把0变为1</td>
+<td align="left">(~a ) 输出结果 -61 ，二进制解释： 1100 0011，在一个有符号二进制数的补码形式。</td>
+</tr>
+<tr>
+<td align="left">&lt;&lt;</td>
+<td align="left">左移动运算符：运算数的各二进位全部左移若干位，由”&lt;&lt;”右边的数指定移动的位数，高位丢弃，低位补0。</td>
+<td align="left">a &lt;&lt; 2 输出结果 240 ，二进制解释： 1111 0000</td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;</td>
+<td align="left">右移动运算符：把”&gt;&gt;”左边的运算数的各二进位全部右移若干位，”&gt;&gt;”右边的数指定移动的位数</td>
+<td align="left">a &gt;&gt; 2 输出结果 15 ，二进制解释： 0000 1111</td>
+</tr>
+</tbody></table>
+<h2 id="Python逻辑运算符"><a href="#Python逻辑运算符" class="headerlink" title="Python逻辑运算符"></a>Python逻辑运算符</h2><table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">逻辑表达式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">and</td>
+<td align="left">x and y</td>
+<td align="left">布尔”与” - 如果 x 为 False，x and y 返回 False，否则它返回 y 的计算值。</td>
+</tr>
+<tr>
+<td align="left">or</td>
+<td align="left">x or y</td>
+<td align="left">布尔”或” - 如果 x 是 True，它返回 x 的值，否则它返回 y 的计算值。</td>
+</tr>
+<tr>
+<td align="left">not</td>
+<td align="left">not x</td>
+<td align="left">布尔”非” - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。</td>
+</tr>
+</tbody></table>
+<h2 id="Python成员运算符"><a href="#Python成员运算符" class="headerlink" title="Python成员运算符"></a>Python成员运算符</h2><p>除了以上的一些运算符之外，Python还支持成员运算符，测试实例中包含了一系列的成员，包括字符串，列表或元组。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">in</td>
+<td align="left">如果在指定的序列中找到值返回 True，否则返回 False</td>
+<td align="left">x 在 y 序列中 ，如果 x 在 y 序列中返回 True</td>
+</tr>
+<tr>
+<td align="left">not in</td>
+<td align="left">如果在指定的序列中没有找到值返回 True，否则返回 False</td>
+<td align="left">x 不在 y 序列中 ，如果 x 不在 y 序列中返回 True</td>
+</tr>
+</tbody></table>
+<h2 id="Python身份运算符"><a href="#Python身份运算符" class="headerlink" title="Python身份运算符"></a>Python身份运算符</h2><p>身份运算符用于比较两个对象的存储单元</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">is</td>
+<td align="left">is 是判断两个标识符是不是引用自一个对象</td>
+<td align="left">x is y，类似 id(x) == id(y) ，如果引用的是同一个对象则返回 True，否则返回 False</td>
+</tr>
+<tr>
+<td align="left">is not</td>
+<td align="left">is not 是判断两个标识符是不是引用自不同对象</td>
+<td align="left">x is not y ，类似 id(a) != id(b)，如果引用的不是同一个对象则返回结果 True，否则返回 False</td>
+</tr>
+</tbody></table>
+<p>注：id() 函数用于获取对象的内存地址。</p>
+<p><strong>is 与 == 区别</strong>：is 用于判断两个变量引用对象内存地址是否为同一个，== 用于判断引用变量的值是否相等。</p>
+<h2 id="Python运算符优先级"><a href="#Python运算符优先级" class="headerlink" title="Python运算符优先级"></a>Python运算符优先级</h2><p>优先级不用记，直接括号强制优先。<br>注意：数字 0 是假，其他都是真；字符 “” 是假，其他都是真。</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/luchsun">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BenRmy">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://benrmy.github.io/">Rmy&#39;s Page</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

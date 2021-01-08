@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hexo自建博客">
+    <meta name="keyword"  content="python 爬虫 rmy">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        python的内部机制 - Rmy的博客 | Rmy&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 大道甚夷,而人好径,终为所误 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rmy</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#init-%E4%B8%8D%E6%98%AF%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-text">__init__()不是构造方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#new-%E5%92%8Cinit-%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-text">new()和init()不同点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%95%E6%97%B6%E8%A6%86%E7%9B%96new"><span class="toc-text">何时覆盖new()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">变量作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%9F%A5%E6%89%BE%E6%9C%BA%E5%88%B6"><span class="toc-text">变量查找机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MRO-%E6%96%B9%E6%B3%95%E8%A7%A3%E6%9E%90%E9%A1%BA%E5%BA%8F-%E4%B8%8E%E5%A4%9A%E7%BB%A7%E6%89%BF%EF%BC%8C%E6%96%B0%E5%BC%8F%E7%B1%BB%E5%B9%BF%E5%BA%A6C3-MRO%E7%AE%97%E6%B3%95"><span class="toc-text">MRO(方法解析顺序)与多继承，新式类广度C3 MRO算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python2-2%E4%BB%A5%E5%89%8D%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%9A%E7%BB%8F%E5%85%B8%E7%B1%BB-classic-class-%E6%97%B6%E4%BB%A3%E3%80%82"><span class="toc-text">Python2.2以前的版本：经典类(classic class)时代。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python2-2%E7%89%88%E6%9C%AC%EF%BC%9A%E6%96%B0%E5%BC%8F%E7%B1%BB-new-style-class-%E8%AF%9E%E7%94%9F%E3%80%82"><span class="toc-text">Python2.2版本：新式类(new-style class)诞生。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#super%E5%92%8C%E7%88%B6%E7%B1%BB%E6%B2%A1%E6%9C%89%E5%AE%9E%E8%B4%A8%E6%80%A7%E7%9A%84%E5%85%B3%E8%81%94"><span class="toc-text">super和父类没有实质性的关联</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0%E7%AC%A6%E6%9C%BA%E5%88%B6"><span class="toc-text">描述符机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E5%88%ABget-%EF%BC%8C-getattr-%E5%92%8Cgetattribute-%E6%96%B9%E6%B3%95"><span class="toc-text">区别get__，__getattr()和getattribute()方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E7%82%B9%E6%8F%90%E9%86%92"><span class="toc-text">两点提醒</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%9B%B4%E4%B8%BA%E5%AE%89%E5%85%A8%E7%9A%84property"><span class="toc-text">使用更为安全的property</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#metaclass%E5%85%83%E7%B1%BB"><span class="toc-text">metaclass元类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python%E5%AF%B9%E8%B1%A1%E5%8D%8F%E8%AE%AE"><span class="toc-text">python对象协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BC%98%E7%82%B9"><span class="toc-text">迭代器优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%BC%BA%E7%82%B9"><span class="toc-text">迭代器缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0"><span class="toc-text">生成器函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yield%E4%B8%8Ereturn%E5%8C%BA%E5%88%AB"><span class="toc-text">yield与return区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E8%A7%A3%E9%87%8A%E5%99%A8%E9%94%81GIL%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-text">全局解释器锁GIL的局限性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GIL%E9%94%81%E6%9C%BA%E5%88%B6"><span class="toc-text">GIL锁机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GIL%E5%AF%B9%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">GIL对多线程和多进程的影响</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-GC%E6%A8%A1%E5%9D%97"><span class="toc-text">对象的管理与垃圾回收(GC模块)</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 大道甚夷,而人好径,终为所误 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        python的内部机制
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-03 11:02:45</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>理解built-in objects，新式类的元类为type类。</p>
+<p>__builtin__模块提供对Python所有内置标识符的直接访问; 例如，<code>__builtin__.open</code>是内置函数的全名 open()。了解其他包括内置函数、内置常量、内置类型。</p>
+<p>为什么需要self参数，这个特别的变量指(实例)对象本身。</p>
+<h1 id="init-不是构造方法"><a href="#init-不是构造方法" class="headerlink" title="__init__()不是构造方法"></a><code>__init__()</code>不是构造方法</h1><p>对象生命周期的基础是创建、初始化和销毁，__init__方法在类的一个对象被创建时，马上运行进行初始化。而构造方法包括创建对象和初始化对象，在python当中，分为两步执行：先执行__new__方法，然后执行__init__方法。</p>
+<ul>
+<li><code>object.__new__(cls，[，args...])</code>：其中cls代表类，args为参数列表。在实例创建之前被调用的，因为它的任务就是创建实例然后返回该实例，是个静态方法。</li>
+</ul>
+<p>注意：__new__至少要有一个参数cls，代表要实例化的类，此参数在实例化时由Python解释器自动提供；__new__必须要有返回值，返回实例化出来的实例，这点在自己实现__new__时要特别注意，可以return父类__new__出来的实例，或者直接是object的__new__出来的实例。</p>
+<ul>
+<li><code>object.__init__(self，[，args...])</code>：其中self代表实例对象，args为参数列表，当实例对象创建完成后被调用的，然后设置对象属性的一些初始值。</li>
+</ul>
+<p>注意：__init__有一个参数self，就是这个__new__返回的实例，__init__在__new__的基础上可以完成一些其它初始化的动作，__init__不需要返回值。也就是，__new__在__init__之前被调用，__new__的返回值(实例)将传递给__init__方法的第一个参数，然后__init__给这个实例设置一些参数。</p>
+<h1 id="new-和init-不同点"><a href="#new-和init-不同点" class="headerlink" title="new()和init()不同点"></a><strong>new</strong>()和<strong>init</strong>()不同点</h1><ul>
+<li><code>__new__()</code>方法一般需要返回类的对象，当返回类的对象时将会自动调用<strong>init</strong>()方法进行初始化，如果没有对象返回，则<strong>init</strong>()方法不会被调用。<code>__init__()</code>不需要显式返回，默认为None，否则会在运行时抛出TypeError。</li>
+<li>当需要控制实例创建的时候可使用<strong>new</strong>()方法，而控制实例初始化的时候使用<strong>init</strong>()方法。</li>
+<li>一般情况下不需要覆盖<strong>new</strong>()方法，但当子类继承自不可变类型，如str、int、或者tuple的时候，往往需要覆盖该方法。</li>
+<li>当需要覆盖<strong>new</strong>()和<strong>init</strong>()方法的时候，这两个方法的参数必须保持一致，如果不一致将导致异常。</li>
+</ul>
+<h1 id="何时覆盖new"><a href="#何时覆盖new" class="headerlink" title="何时覆盖new()"></a>何时覆盖<strong>new</strong>()</h1><ul>
+<li>当类继承(str、int、tuple或者frozenset等)不可变类型且默认的<strong>new</strong>()方法不能满足需求的时候。</li>
+<li>用来实现工厂模式或者单例模式或者进行元类编程(元类编程中常常需要使用<strong>new</strong>()来控制对象创建)的时候。</li>
+<li>作为用来初始化<strong>init</strong>()方法在多继承的情况下，子类的<strong>init</strong>()方法如果不显式调用父类的<strong>init</strong>()方法，则父类的<strong>init</strong>()方法不会被调用。</li>
+</ul>
+<h1 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h1><ol>
+<li>局部作用域：一般来说函数的每次调用都会创建一个新的本地作用域，拥有新的命名空间。因此函数内的变量名可以与函数外的其他变量相同，由于其命名空间不同，并不会产生冲突。默认情况下函数内部任意的赋值操作(包括=语句、import语句、def语句、参数传递等)所定义的变量名，如果没有用global语句，则声明都为局部变量，即仅在函数内可见。</li>
+<li>全局作用域：定义在python模块文件中的变量名拥有全局作用域，需要注意的是，这里的全局仅限单个文件，即在一个文件的顶层的变量名仅在这个文件内可见，并非所有的文件，其他文件中想使用这些变量名必须先导入对应的模块。当在函数之外给一个变量名赋值时是在全局作用域的情况下进行的。</li>
+<li>嵌套作用域：一般在多重函数嵌套的情况下才会考虑到。需要注意的是global语句仅针对全局变量，在嵌套作用域的情况下，如果想在嵌套的函数内修改外层函数中定义的变量，即使使用global也不能达到目的，其结果最终是在嵌套的函数所在的命名空间中创建了一个新的变量。真正的解决方案是python3的nonlocal关键字。</li>
+<li>内置作用域：它是通过一个标准库名为__builtin__的模块来实现的。其包括内置函数、内置常量和内置类型等。</li>
+</ol>
+<h1 id="变量查找机制"><a href="#变量查找机制" class="headerlink" title="变量查找机制"></a>变量查找机制</h1><ul>
+<li>在最内层的范围内查找，一般而言，就是函数内部，即在locals()里面查找。</li>
+<li>在模块内查找，即在globals()里面查找。</li>
+<li>在外层查找，即在内置模块中查找，也就是在__builtin__中查找。</li>
+</ul>
+<h1 id="MRO-方法解析顺序-与多继承，新式类广度C3-MRO算法"><a href="#MRO-方法解析顺序-与多继承，新式类广度C3-MRO算法" class="headerlink" title="MRO(方法解析顺序)与多继承，新式类广度C3 MRO算法"></a>MRO(方法解析顺序)与多继承，新式类广度C3 MRO算法</h1><p>事实上，对于定义的每一个类，Python 会计算出一个方法解析顺序(Method Resolution Order，MRO)列表，它代表了类继承的顺序。多重继承会引发很多问题，比如二义性，Python中一切皆引用，这使得他不会像C++一样使用虚基类处理基类对象重复的问题，但是如果父类存在同名函数的时候还是会产生二义性，Python中处理这种问题的方法就是MRO。</p>
+<h2 id="Python2-2以前的版本：经典类-classic-class-时代。"><a href="#Python2-2以前的版本：经典类-classic-class-时代。" class="headerlink" title="Python2.2以前的版本：经典类(classic class)时代。"></a>Python2.2以前的版本：经典类(classic class)时代。</h2><p>经典类是一种没有继承的类，实例类型都是type类型，如果经典类被作为父类，子类调用父类的构造函数时会出错。这时MRO的方法为DFS(深度优先搜索(子节点顺序：从左到右))。</p>
+<h2 id="Python2-2版本：新式类-new-style-class-诞生。"><a href="#Python2-2版本：新式类-new-style-class-诞生。" class="headerlink" title="Python2.2版本：新式类(new-style class)诞生。"></a>Python2.2版本：新式类(new-style class)诞生。</h2><p>为了使类和内置类型更加统一，引入了新式类。新式类的每个类都继承于一个基类，可以是自定义类或者其它类，默认承于object。子类可以调用父类的构造函数。这时有两种MRO的方法，如果是经典类MRO为DFS(深度优先搜索(子节点顺序：从左到右))；如果是新式类MRO为BFS(广度优先搜索(子节点顺序：从左到右))。</p>
+<p>又分为正常继承模式和棱形继承模式。但两种继承模式在DFS和BFS中均有优缺点，所以使用了C3算法，其解决了单调性问题，和只能继承无法重写的问题。</p>
+<h1 id="super和父类没有实质性的关联"><a href="#super和父类没有实质性的关联" class="headerlink" title="super和父类没有实质性的关联"></a>super和父类没有实质性的关联</h1><p>在类的继承中，如果重定义某个方法，该方法会覆盖父类的同名方法，但有时，希望能同时实现父类的功能，这时就需要调用父类的方法，可通过使用 super 来实现。</p>
+<p>super 的一个最常见用法可以说是在子类中调用父类的初始化方法。但其和父类没有实质性的关联，事实上super(cls，inst) 获得的是cls在inst的 MRO 列表中的下一个类，只是有时其下一个类刚好是其父类。</p>
+<p>super的工作原理如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">super</span>(<span class="params">cls，inst</span>):</span></span><br><span class="line">    mro = inst.__class__.mro()</span><br><span class="line">    <span class="keyword">return</span> mro[mro.index(cls) + <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>一个类的MRO列表就是合并所有父类的MRO列表，并遵循以下三条原则：</p>
+<ul>
+<li>子类永远在父类前面</li>
+<li>如果有多个父类，会根据它们在列表中的顺序被检查</li>
+<li>如果对下一个类存在的两个合法的选择，选择第一个父类</li>
+</ul>
+<h1 id="描述符机制"><a href="#描述符机制" class="headerlink" title="描述符机制"></a>描述符机制</h1><p>描述符是一种协议，实现了相应的描述符方法便会有相应的描述符行为：</p>
+<ul>
+<li><strong>get</strong>(self，instance，owner) –&gt; return value</li>
+<li><strong>set</strong>(self，instance，value)</li>
+<li><strong>delete</strong>(self，instance)</li>
+</ul>
+<p>描述符对象以类型 (owner class) 成员的方式出现，且最少要实现一个协议方法。最常见的描述符有 property、staticmethod、classsmethod。访问描述符类型成员时，解释器会自动调用与行为相对应的协议方法。</p>
+<ul>
+<li>实现 get 和 set 方法，称为 data descriptor。</li>
+<li>仅有 get 方法的，称为 non-data descriptor。</li>
+<li>get 对 owner_class、owner_instance 访问有效。</li>
+<li>set、delete 仅对 owner_instance 访问有效。</li>
+</ul>
+<blockquote>
+<p>实例方法绑定到instance实例；类方法绑定到class类；静态方法没有绑定，仅仅是个方法。</p>
+</blockquote>
+<p>任何实现了<code>__get__()，__set__()，或者 __delete__()</code>方法的对象就是描述符。一个class的属性是一个描述符的时候，对这个属性的访问会触发特定的绑定行为。一般使用a.b的方式访问，修改和删除属性，它通过查找class的字典来访问属性b，但是如果b是一个描述符，那么get，set和delete相关的描述符方法会被调用。描述符是很多特性实现的基础，比如：方法，函数，属性，类方法，静态方法还有对父类方法的引用。</p>
+<h1 id="区别get-，-getattr-和getattribute-方法"><a href="#区别get-，-getattr-和getattribute-方法" class="headerlink" title="区别get__，__getattr()和getattribute()方法"></a>区别<strong>get__，__getattr</strong>()和<strong>getattribute</strong>()方法</h1><p><code>__get__，__getattr__和__getattribute</code>都是访问属性的方法，但不太相同。</p>
+<ul>
+<li><code>__getattr__(self，name)</code>：当一般位置找不到attribute的时候，会调用getattr，返回一个值或AttributeError异常。</li>
+<li><code>__getattribute__(self，name)</code>：无条件被调用，通过实例访问属性。如果class中定义了<strong>getattr</strong>()，则<strong>getattr</strong>()不会被调用(除非显示调用或引发AttributeError异常)</li>
+<li><code>__get__(self，instance，owner)</code>：如果class定义了它，则这个class就可以称为descriptor。owner是所有者的类，instance是访问descriptor的实例，如果不是通过实例访问，而是通过类访问的话，instance则为None。</li>
+</ul>
+<p>descriptor的实例自己访问自己是不会触发__get__的，而会触发__call__，只有descriptor作为其它类的属性时才有意义。</p>
+<p>注意，不仅仅是<strong>getattribute</strong>()引发的AttributeError异常，property中定义的get()方法抛出异常的时候也会调用_getattr__()方法。需要特别注意的是当这两个方法同时被定义的时候，要么在<strong>getattribute</strong>()中显式调用，要么触发AttributeError异常，否则<strong>getattr</strong>()永远不会被调用。</p>
+<p>每次通过实例访问属性，都会经过__getattribute__函数。而当属性不存在时，仍然需要访问__getattribute__，不过接着要访问__getattr__。这就好像是一个异常处理函数。而每次访问descriptor(即实现了__get__的类)，都会先经过__get__函数。需要注意的是，当使用类访问不存在的变量是，不会经过__getattr__函数。而descriptor不存在此问题，只是把instance标识为none而已。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>注意无穷递归调用：覆盖<strong>getattr</strong>()和<strong>getattribute</strong>()的时候必须小心，调用父类的相应方法才不会造成无穷递归。</li>
+<li>访问未定义的属性。如果在<strong>getattr</strong>()方法中不抛出AttributeError异常或者显式返回一个值，则会返回None，此时可能会影响程序的实际运行预期。</li>
+</ul>
+<h2 id="两点提醒"><a href="#两点提醒" class="headerlink" title="两点提醒"></a>两点提醒</h2><ul>
+<li>覆盖了<strong>getattribute</strong>()方法之后，任何属性的访问都会调用用户定义的<strong>getattribute</strong>()方法，性能上有所降低，比使用默认的方法要慢。</li>
+<li>覆盖的<strong>getattr</strong>()方法如果能够动态处理事先未定义的属性，可以更好地实现数据隐藏。因为dir()通常只显示正常的属性和方法，因此不会将该属性列为可用属性。</li>
+</ul>
+<h1 id="使用更为安全的property"><a href="#使用更为安全的property" class="headerlink" title="使用更为安全的property"></a>使用更为安全的property</h1><p>property的定义为：property(fget=None，fset=None，fdel=None，doc=None)</p>
+<p>注意：使用property并不能真正地实现完全属性只读的目的，正如以双下划线命名的变量并不是真正的私有变量一样，这些方法只是在直接修改属性上增加了一些障碍。</p>
+<h1 id="metaclass元类"><a href="#metaclass元类" class="headerlink" title="metaclass元类"></a>metaclass元类</h1><p>类就是一组用来描述如何生成一个对象的代码段，但python类同样也是一种对象。元类就是用来创建类的“东西”。type就是Python在背后用来创建所有类的元类。str是用来创建字符串对象的类，而int是用来创建整数对象的类。type就是创建类对象的类。</p>
+<p>也可以把元类称为“类工厂”(不要和工厂类搞混了)，type就是Python的内建元类，当然了，也可以创建自己的元类。可以在写一个类的时候为其添加__metaclass__属性。</p>
+<p>首先写下class Foo(object)，但是类对象Foo还没有在内存中创建。Python会在类的定义中寻找__metaclass__属性，如果找到了，Python就会用它来创建类Foo，如果没有找到，就会用内建的type来创建这个类。</p>
+<p>可以在__metaclass__中放置些什么代码呢？可以创建一个类的东西。那么什么可以用来创建一个类呢？type，或者任何使用到type或者子类化type的东东都可以。</p>
+<p>元类的主要目的就是为了当创建类时能够自动地改变类。就元类本身而言，作用其实是很简单：</p>
+<ul>
+<li>拦截类的创建</li>
+<li>修改类</li>
+<li>返回修改之后的类</li>
+</ul>
+<p>Python中的一切都是对象，它们要么是类的实例，要么是元类的实例，除了type。type实际上是它自己的元类，在纯Python环境中这可不是你能够做到的，这是通过在实现层面耍一些小手段做到的。其次，元类是很复杂的。对于非常简单的类，可能不希望通过使用元类来对类做修改。也可以通过其他两种技术来修改类：</p>
+<ul>
+<li>Monkey patching，即猴子补丁</li>
+<li>class decorators，即类装饰器</li>
+</ul>
+<p>当需要动态修改类时，99%的时间里最好使用上面这两种技术。当然了，其实在99%的时间里根本就不需要动态修改类。</p>
+<h1 id="python对象协议"><a href="#python对象协议" class="headerlink" title="python对象协议"></a>python对象协议</h1><p>存在多种协议，用于实现鸭子类型(Duck Typing)。包括类型转换协议、比较大小协议、数值类型相关、容器协议、可调用对象协议、可哈希对象、属性协议、上下文管理协议等。</p>
+<p><strong>类型转换协议</strong>：顾名思义就是用来进行类型转，如整数到浮点数。</p>
+<p><strong>比较大小的协议</strong>：这个协议依赖于<strong>cmp</strong>()方法，当两者相等时返回0，self&lt;0时返回负值，反之返回正值。但是这种返回有点复杂，Python又定义了<code>__eq__()、__ne__()、__lt__()、__gt__()</code>等方法来实现相等、不等、小于和大于的判定。这也是Python对==，!=，&lt;，&gt;等操作符进行重载支撑的机制，也就是说重载这些操作符，就是要重新定义对应的方法。</p>
+<p><strong>数值类型相关的协议</strong>：这一类方法比较多，主要是数值之间的一些操作。另外Python中还有一个特有的概念: 反运算。</p>
+<p><strong>容器类协议</strong>：既然为容器，那么肯定会有查询、取值、删除、赋值、求长度等等一系列动作行为，那么必有对应的方法与这些操作对应。</p>
+<p><strong>可调用对象协议</strong>：也就是类似函数对象，能够让类实例表现的像函数一样，这样可以让每一个函数调用都有所不同。对象通过提供<code>__call__(slef，[，*args [，**kwargs]])</code>方法可以模拟函数的行为。</p>
+<p><strong>哈希协议</strong>：如果对象有<strong>hash</strong>()方法，表示是一个可哈希对象。如果一个对象是可哈希的，那么在它的生存期内必须不可变(需要一个哈希函数)，而且可以和其他对象比较(需要比较方法)，比较值相同的对象一定有相同的哈希值。这也就是说所有不可变的内置类型都是可哈希的，比如string，tuple。所有可变的内置类型都是不可哈希的，比如list，dict(即没有<strong>hash</strong>()方法)。字典的key必须是可哈希的，所以tuple，string可以做key，而list不能做key。</p>
+<p><strong>上下文管理协议</strong>：即在对象中定义<strong>enter</strong>()和<strong>exit</strong>()方法。其适用于可能事先需要设置，事后做清理工作的场景。</p>
+<p><strong>利用操作符重载实现中缀语法</strong>：类似于str.upper(hex(int(“423423”))) 这种语法形式的称之为前缀式语法，也就是说语法函数这些东西在参数的前面它执行的时候是先执行最里面的那部分，类似于一个洋葱，一层一层包裹。而中缀语法类似于pipe管道的写法。如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">P</span>(<span class="params"><span class="built_in">object</span></span>):</span>  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self，f</span>):</span>  </span><br><span class="line">        self.f = f  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__ror__</span>(<span class="params">self，y</span>):</span>  </span><br><span class="line">        <span class="keyword">return</span> self.f(y) </span><br><span class="line"><span class="string">&quot;423423&quot;</span> | P(<span class="built_in">int</span>) | P(<span class="built_in">hex</span>) | P(<span class="built_in">str</span>.upper)</span><br></pre></td></tr></table></figure>
+<p><strong>python迭代器协议</strong>：对象必须提供一个next方法，执行该方法要么返回迭代中的下一项，要么就引起一个StopIteration异常，以终止迭代 (只能往后走不能往前退)。协议是一种约定，可迭代对象实现了迭代器协议，python的内部工具(如for循环，sum，min，max函数等)使用迭代器协议访问对象。</p>
+<p><strong>可迭代对象</strong>：只要对象本身有__iter__方法，那它就是可迭代的。</p>
+<p>注：对象可以通过__next__取值，就是迭代器。或执行对象下的__iter__方法，得到的结果就是迭代器。</p>
+<h2 id="迭代器优点"><a href="#迭代器优点" class="headerlink" title="迭代器优点"></a>迭代器优点</h2><ul>
+<li>迭代器提供了一种不依赖于索引的取值方式，这样就可以遍历那些没有索引的可迭代对象了(字典，集合，文件)</li>
+<li>迭代器与列表比较，迭代器是惰性计算的，更节省内存</li>
+</ul>
+<h2 id="迭代器缺点"><a href="#迭代器缺点" class="headerlink" title="迭代器缺点"></a>迭代器缺点</h2><ul>
+<li>无法获取迭代器的长度，使用不如列表索引取值灵活</li>
+<li>一次性的，只能往后取值，不能倒着取值</li>
+</ul>
+<p><strong>for循环的本质</strong>：循环所有对象，全都是使用迭代器协议(字符串，列表，元组，字典，集合，文件对象)，这些都是可迭代对象，只不过在for循环式(遍历之前)，调用了对象内部的__iter__方法将其变成了可迭代对象(迭代器)，然后for循环调用可迭代对象的__next__方法去取值，而且for循环会捕捉StopIteration异常，以终止迭代。</p>
+<p><strong>python的生成器</strong>：可以理解为一种数据类型，这种数据类型自动实现了迭代器协议(其他的数据类型需要调用自己内置的__iter__方法)，所以生成器就是可迭代对象。注意：生成器只能遍历一次。</p>
+<p>生成器分类及在python中的表现形式：(Python有两种不同的方式提供生成器)</p>
+<ul>
+<li>生成器函数：常规函数定义，但是，使用yield语句而不是return语句返回结果。yield语句一次返回一个结果，在每个结果中间，挂起函数的状态，以便下次从它离开的地方继续执行。生成器就是一个函数，这个函数内包含有yield这个关键字。yield把函数变成生成器，直到迭代器。</li>
+<li>生成器表达式：类似于列表推导，但是，生成器返回按需产生结果的一个对象，而不是一次构建一个结果列表。把列表解析的[]换成()得到的就是生成器表达式。列表解析与生成器表达式都是一种便利的编程方式，只不过生成器表达式更节省内存。</li>
+</ul>
+<p>Python使用生成器对延迟操作提供了支持。所谓延迟操作，是指在需要的时候才产生结果，而不是立即产生结果。这也是生成器的主要好处。生成器本质和其他的数据类型一样，都是实现了迭代器协议，只不过生成器附加了一个延迟计算省内存的好处。</p>
+<h2 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h2><ul>
+<li>语法上和函数类似：生成器函数和常规函数几乎是一样的。它们都是使用def语句进行定义，差别在于，生成器使用yield语句返回一个值，而常规函数使用return语句返回一个值。</li>
+<li>自动实现迭代器协议：对于生成器，Python会自动实现迭代器协议，以便应用到迭代背景中(如for循环，sum函数)。由于生成器自动实现了迭代器协议，所以，可以调用它的next方法，并且，在没有值可以返回的时候，生成器自动产生StopIteration异常。</li>
+<li>状态挂起：生成器使用yield语句返回一个值。yield语句挂起该生成器函数的状态，保留足够的信息，以便之后从它离开的地方继续执行。<br>e.send与next(e)的区别：</li>
+<li>如果函数内yield是表达式形式，那么必须先next(e)</li>
+<li>二者的共同之处是都可以让函数在上次暂停的位置继续运行，不一样的地方在于send在触发下一次代码的执行时，会顺便给yield传一个值</li>
+</ul>
+<h2 id="yield与return区别"><a href="#yield与return区别" class="headerlink" title="yield与return区别"></a>yield与return区别</h2><ul>
+<li>return只能返回一次函数就彻底结束了，而yield能返回多次值</li>
+<li>函数在暂停以及继续下一次运行时的状态是由yield保存</li>
+</ul>
+<p>另：如果在一个函数内部yield的使用方式是表达式形式的话，如x=yield，那么该函数成为协程函数。</p>
+<p><strong>基于生成器的协程及greenlet</strong>：greenlet是一个C语言编写的程序库，它与yield没有密切的关系。greenlet这个库里最为关键的一个类型就是PyGreenlet，它是一个结构体，每一个PyGreenlet都可以看成一个调用栈，从它的入口函数开始，所有的代码都在这个调用栈上运行。它能够随时记录代码运行现场，并随时中止，以及恢复。</p>
+<p>gevent将greenlet与libevent/libev结合起来，是时下最受欢迎的网络编程库。</p>
+<h1 id="全局解释器锁GIL的局限性"><a href="#全局解释器锁GIL的局限性" class="headerlink" title="全局解释器锁GIL的局限性"></a>全局解释器锁GIL的局限性</h1><p>GIL，它是python虚拟机上用作互斥线程的一种机制，它的作用是保证任何情况下虚拟机只有一个线程被运行，而其他线程都处于等待GIL锁被释放的状态。其是CPython中特有的全局解释器锁(其它实现版本因为有自己线程调度机制，所以没有GIL机制)。这把锁在解释器进程中是全局有效的，它主要锁定Python线程的CPU执行资源。CPython解释器中，线程想要执行CPU指令需要2个条件：</p>
+<ul>
+<li>被操作系统调度出来(操作系统允许它占用CPU)</li>
+<li>获取到GIL(CPython解释器允许它执行指令)</li>
+</ul>
+<p>非常不幸的是，并不总是能满足这2个条件。经常出现的情况是：已经满足条件1，却被条件2限制。而这就是GIL影响Python性能的主要原因(其它语言只需满足条件1即可)。<br>为了能在Python中利用多核来提高计算效率，还是有如下的方法可以做到：</p>
+<ul>
+<li>使用python3.4或更高版本(对GIL机制进行了优化)</li>
+<li>使用多进程替换多线程(多进程之间没有GIL，但是进程本身的资源消耗较多)</li>
+<li>使用C编写高性能模块(with nogil去掉GIL限制)</li>
+<li>指定cpu运行线程(使用affinity模块)</li>
+<li>使用Pypy、Jython、IronPython等无GIL解释器</li>
+<li>全IO密集型任务时可以使用多线程，GIL锁对其影响不大</li>
+<li>使用协程(高效的单线程模式，也称微线程；通常与多进程配合使用)</li>
+</ul>
+<p>所有线程都是轮流占用(单个)CPU执行指令。</p>
+<h1 id="GIL锁机制"><a href="#GIL锁机制" class="headerlink" title="GIL锁机制"></a>GIL锁机制</h1><p>对于有I/O操作的多线程，始终只有一个活的GIL锁的线程在运行，每次遇到I/O操作便会进行GIL锁的释放；但对于纯计算的程序，没有I/O操作，解释器便会根据sys.setcheckinterval的设置来自动进行线程间的切换，默认情况下每个100个时钟(python内部时钟，对应于解释器执行的指令)就会释放GIL锁从而轮换其他线程的执行。</p>
+<p>GIL优点是大大简化了python线程中共享资源的管理，此外，对于扩展的C程序的外部调用，即使不是线程安全的，但由于GIL的存在，线程会阻塞直到外部调用函数返回，线程安全不再是一个问题。缺点是会对多线程的效率有不小影响(尤其是CPU计算密集型)。</p>
+<h1 id="GIL对多线程和多进程的影响"><a href="#GIL对多线程和多进程的影响" class="headerlink" title="GIL对多线程和多进程的影响"></a>GIL对多线程和多进程的影响</h1><ul>
+<li>Python的GIL在单核情况下对性能的影响可以忽略不计，几乎没有。</li>
+<li>Python由于其GIL的存在在多核CPU的情况下Thread的表现非常差，但是Process则不受GIL的影响。</li>
+<li>Python内置的数据类是不适合用于大量的数学计算的，当然这也不仅仅是Python的问题，其它完全面向对象的语言都有这个问题，要进行大量的数学计算就要用把代码移到C/C++中去实现，这样不仅可以去除GIL的影响，更可以让性能获得几十倍上百倍的提升，或者用numpy之类的扩展在执行科学计算时也可以让性能大幅的提升。</li>
+<li>Python慢其实就是慢在数字计算上，如果每一个数字都是一个对象，在计算的时候就免不了不断的为对象申请内存，释放内存，速度肯定就慢下来。</li>
+<li>Python对数据结构的操作是非常高效的，像Python内置的强大的dict，str，list等，其处理的速度真的可以和C媲美，因为它们的实现本身就是用C实现的。而<code>数据结构+算法=程序</code>只有在用Python这样的语言时才会有更切身的体会。</li>
+<li>用Python开发程序时，不得不花点时间在性能优化上来，过程也很简单：用cProfile(性能分析器)之类的工具查找出比较耗时的操作，然后将其移到C中去实现。另外，如果是使用多核CPU的情况，一定要小心使用Thread，尽量用Process来替代Thread。Python的性能优化过程也是程序开发中有挑战又非常有成就感的部分。</li>
+<li>记住，不要过早的对程序进行优化，过早优化是罪恶之源 – Donald Knuth。</li>
+</ul>
+<h1 id="对象的管理与垃圾回收-GC模块"><a href="#对象的管理与垃圾回收-GC模块" class="headerlink" title="对象的管理与垃圾回收(GC模块)"></a>对象的管理与垃圾回收(GC模块)</h1><p>Python中的垃圾回收是以引用计数为主，标记-清除和分代收集为辅。引用计数最大缺陷就是循环引用的问题，所以Python采用了辅助方法。</p>
+<p>注意：__del__方法要慎用，如果用的话一定要保证没有循环引用。否则可能会造成内存泄漏。</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/luchsun">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BenRmy">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://benrmy.github.io/">Rmy&#39;s Page</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

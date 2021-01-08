@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hexo自建博客">
+    <meta name="keyword"  content="python 爬虫 rmy">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        模块解析 - Rmy的博客 | Rmy&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 大道甚夷,而人好径,终为所误 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rmy</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#import%E6%A8%A1%E5%9D%97%E8%A7%A3%E6%9E%90"><span class="toc-text">import模块解析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E8%A1%A8"><span class="toc-text">符号表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 大道甚夷,而人好径,终为所误 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        模块解析
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-02-03 10:31:37</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>一个包含所有定义的函数和变量的文件，其后缀名是.py。模块可以被别的程序引入，以使用该模块中的函数等功能。这也是使用 python 标准库的方法。不管执行了多少次import，一个模块只会被导入一次。</p>
+<h1 id="import模块解析"><a href="#import模块解析" class="headerlink" title="import模块解析"></a>import模块解析</h1><p><strong>import作用</strong>：导入/引入一个python模块，其中包括.py文件、带有<strong>init</strong>.py文件的目录。多次重复使用import语句时，不会重新加载被指定的模块，只是把该模块的内存地址引用到本地变量环境。<br><strong>reload作用</strong>：对已经加载的模块进行重新加载，一般用于原模块有变化等特殊情况，reload前该模块必须已经import过。reload会重新加载已加载的模块，但原来已经使用的实例还是会使用旧的模块，而新生产的实例会使用新的模块；reload后还是用原来的内存地址；不支持from-import格式的模块进行重新加载。其一般用在sys库的加载。<br><strong>__import__作用</strong>：同import语句同样的功能，但__import__是一个函数，并且只接收字符串作为参数。其实import语句就是调用这个函数进行导入工作的，<code>import sys -&gt; sys = __import__(&#39;sys&#39;)</code>。通常在动态加载时可以使用到这个函数，比如希望加载某个文件夹下的所用模块，但是其下的模块名称又会经常变化时，就可以使用这个函数动态加载所有模块了，最常见的场景就是插件功能的支持。<br><strong>通过字符串动态重新加载模块</strong>：reload()无法使用，可以先unimport一个模块，然后再__import__来重新加载模块。通过<code>del sys.modules[&#39;XX&#39;]</code>可以删除一个模块。</p>
+<p>使用import语句的时候，Python解释器的搜索路径：搜索路径是由一系列目录名组成的，Python解释器就依次从这些目录中去寻找所引入的模块。类似环境变量，事实上，也可以通过定义环境变量的方式来确定搜索路径。搜索路径是在Python编译或安装的时候确定的，安装新的库应该也会修改。</p>
+<h1 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h1><p>每个模块有各自独立的符号表，在模块内部为所有的函数当作全局符号表来使用。所以，模块的作者可以在模块内部使用这些全局变量，而不用担心和其他用户的全局变量混淆。从另一个方面，也可以通过 modname.itemname 这样的表示法来访问模块内的函数。</p>
+<p>模块是可以导入其他模块的。在一个模块(或者脚本，或者其他地方)的最前面使用 import 来导入一个模块。当然这只是一个惯例，而不是强制的。被导入的模块的名称将被放入当前操作的模块的符号表中。</p>
+<p><strong>from … import 语句</strong>：这种导入的方法不会把被导入的模块的名称放在当前的字符表中。</p>
+<p>*<em>from … import</em> 语句**：这将把所有的名字都导入进来，但是那些由单一下划线(_)开头的名字不在此列。大多数情况，不使用这种方法，因为引入的其它来源的命名，很可能覆盖了已有的定义。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p><strong>__name__属性</strong>：一个模块被另一个程序第一次引入时，其主程序将运行。如果想在模块被引入时，模块中的某一程序块不执行，可以用<strong>name__属性来使该程序块仅在该模块自身运行时执行。注：每个模块都有一个__name__属性，当其值是’__main</strong>‘时，表明该模块自身在运行，否则是被引入。</p>
+<p><strong>dir(object) 函数</strong>：内置的函数可以找到模块内定义的所有名称。以一个字符串列表的形式返回，如果没有给定参数，那么 dir() 函数会罗列出当前定义的所有名称。即返回对象的所有方法。</p>
+<p><strong>标准模块</strong>：Python 本身带着一些标准的模块库。这些组件会根据不同的操作系统进行不同形式的配置。</p>
+<p><strong>包</strong>：是一种管理 Python 模块命名空间的形式，采用点模块名称。比如一个模块的名称是 A.B，那么他表示一个包 A中的子模块 B 。就好像使用模块的时候，不用担心不同模块之间的全局变量相互影响一样，采用点模块名称这种形式也不用担心不同库之间的模块重名的情况。</p>
+<p>在导入一个包的时候，Python 会根据 sys.path 中的目录来寻找这个包中包含的子目录。目录只有包含一个叫做 <strong>init</strong>.py 的文件才会被认作是一个包，主要是为了避免一些滥俗的名字(比如叫做 string)影响搜索路径中的有效模块。最简单的情况，放一个空的文件：<strong>init</strong>.py就可以了。当然这个文件中也可以包含一些初始化代码或者为 __all__变量赋值。</p>
+<p>如果使用形如import item.subitem.subsub.item这种导入形式，import语法会首先把item当作一个包定义的名称，如果没找到，再试图按照一个模块去导入。如果还没找到，那么一个ImportError 异常被抛出。反之，除了最后一项，都必须是包，而最后一项则可以是模块或者是包，但是不可以是类，函数或者变量的名字。</p>
+<p>使用 from sound.effects import *会发生什么？Python 会进入文件系统，找到这个包里面所有的子模块，一个一个的把它们都导入进来。但是很不幸，这个方法在 Windows平台上工作的就不是非常好，因为Windows是一个大小写不区分的系统。在这类平台上，没有人敢担保一个叫做 ECHO.py 的文件导入为模块 echo 还是 Echo 甚至 ECHO。为了解决这个问题，只能烦劳包作者提供一个精确的包的索引了。</p>
+<p><strong>导入语句遵循如下规则</strong>：如果包定义文件 <strong>init</strong>.py 存在一个叫做 <strong>all</strong> 的列表变量，那么在使用 from package import * 的时候就把这个列表中的所有名字作为包内容导入。</p>
+<p>作为包的作者，可别忘了在更新包之后保证 <strong>all</strong> 也更新了。如果 <strong>all</strong> 没有定义，那么使用<code>from sound.effects import *</code>这种语法的时候，就不会导入包 sound.effects 里的任何子模块。他只是把包sound.effects和它里面定义的所有内容导入进来(可能运行<strong>init</strong>.py里定义的初始化代码)。这会把 <strong>init</strong>.py 里面定义的所有名字导入进来。并且他不会破坏掉在这句话之前导入的所有明确指定的模块。不主张使用*这种方法来导入模块。推荐使用<code>from Package import specific_submodule</code>这种方法。无论是隐式的还是显式的相对导入都是从当前模块开始的。主模块的名字永远是”<strong>main</strong>“，一个Python应用程序的主模块，应当总是使用绝对路径引用。</p>
+<p>包还提供一个额外的属性<strong>path__。这是一个目录列表，里面每一个包含的目录都有为这个包服务的__init</strong>.py，你得在其他<strong>init</strong>.py被执行前定义。可以修改这个变量，用来影响包含在包里面的模块和子包。这个功能并不常用，一般用来扩展包里面的模块。</p>
+<p><strong>输出格式美化</strong>：Python两种输出值的方式: 表达式语句和 print() 函数。第三种方式是使用文件对象的 write() 方法，标准输出文件可以用 sys.stdout 引用。如果希望输出的形式更加多样，可以使用 str.format() 函数来格式化输出值。如果希望将输出的值转成字符串，可以使用 repr() 或 str() 函数来实现。</p>
+<ul>
+<li>str()： 函数返回一个用户易读的表达形式。</li>
+<li>repr()： 产生一个解释器易读的表达形式。str() 函数可以转义字符串中的特殊字符，repr()的参数可以是 Python 的任何对象。</li>
+</ul>
+<p>字符串对象的 rjust() 方法，它可以将字符串靠右，并在左边填充空格。还有类似的方法，如ljust() 和 center()。 这些方法并不会写任何东西，它们仅仅返回新的字符串。另一个方法 zfill()，它会在数字的左边填充 0。</p>
+<p><strong>旧式字符串格式化</strong>：% 操作符也可以实现字符串格式化。它将左边的参数作为类似 printf() 式的格式化字符串，而将右边的代入，然后返回格式化后的字符串。</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/luchsun">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BenRmy">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://benrmy.github.io/">Rmy&#39;s Page</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

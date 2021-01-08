@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hexo自建博客">
+    <meta name="keyword"  content="python 爬虫 rmy">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        数字(Number)相关函数 - Rmy的博客 | Rmy&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 大道甚夷,而人好径,终为所误 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rmy</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#math%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="toc-text">math数学函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#random%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%87%BD%E6%95%B0"><span class="toc-text">random随机数函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E5%87%BD%E6%95%B0"><span class="toc-text">三角函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E5%B8%B8%E9%87%8F"><span class="toc-text">数学常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">数值类型转换</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 大道甚夷,而人好径,终为所误 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        数字(Number)相关函数
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-02-10 14:11:02</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>Python 数字数据类型用于存储数值。数据类型是不允许改变的，这就意味着如果改变数字数据类型得值，将重新分配内存空间。</p>
+<h2 id="math数学函数"><a href="#math数学函数" class="headerlink" title="math数学函数"></a>math数学函数</h2><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">返回值(描述)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">abs(x)</td>
+<td align="left">返回数字的绝对值，如abs(-10) 返回 10</td>
+</tr>
+<tr>
+<td align="left">ceil(x)</td>
+<td align="left">返回数字的上入整数，如math.ceil(4.1) 返回 5</td>
+</tr>
+<tr>
+<td align="left">cmp(x，y)</td>
+<td align="left">如果 x &lt; y 返回 -1，如果 x == y 返回 0，如果 x &gt; y 返回 1。Python 3 已废弃,使用 <code>(x&gt;y)-(x&lt;y) 替换</code></td>
+</tr>
+<tr>
+<td align="left">exp(x)</td>
+<td align="left">返回e的x次幂，如math.exp(1) 返回2.718281828459045</td>
+</tr>
+<tr>
+<td align="left">fabs(x)</td>
+<td align="left">返回数字的绝对值，如math.fabs(-10) 返回10.0</td>
+</tr>
+<tr>
+<td align="left">floor(x)</td>
+<td align="left">返回数字的下舍整数，如math.floor(4.9)返回 4</td>
+</tr>
+<tr>
+<td align="left">log(x)</td>
+<td align="left">返回对数，如math.log(math.e)返回1.0，math.log(100，10)返回2.0</td>
+</tr>
+<tr>
+<td align="left">log10(x)</td>
+<td align="left">返回以10为基数的x的对数，如math.log10(100)返回 2.0</td>
+</tr>
+<tr>
+<td align="left">max(x1，x2，…)</td>
+<td align="left">返回给定参数的最大值，参数可以为序列。</td>
+</tr>
+<tr>
+<td align="left">min(x1，x2，…)</td>
+<td align="left">返回给定参数的最小值，参数可以为序列。</td>
+</tr>
+<tr>
+<td align="left">modf(x)</td>
+<td align="left">返回x的整数部分与小数部分，两部分的数值符号与x相同，整数部分以浮点型表示。</td>
+</tr>
+<tr>
+<td align="left">pow(x，y)</td>
+<td align="left">x**y 运算后的值。</td>
+</tr>
+<tr>
+<td align="left"><code>round(x [,n])</code></td>
+<td align="left">返回浮点数x的四舍五入值，如给出n值，则代表舍入到小数点后的位数。</td>
+</tr>
+<tr>
+<td align="left">sqrt(x)</td>
+<td align="left">返回数字x的平方根，数字可以为负数，返回类型为实数，如math.sqrt(4)返回 2+0j</td>
+</tr>
+</tbody></table>
+<h2 id="random随机数函数"><a href="#random随机数函数" class="headerlink" title="random随机数函数"></a>random随机数函数</h2><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">choice(seq)</td>
+<td align="left">从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数</td>
+</tr>
+<tr>
+<td align="left"><code>randrange([start,] stop[,step])</code></td>
+<td align="left">从指定范围内，按指定基数递增的集合中获取一个随机数，基数缺省值为1</td>
+</tr>
+<tr>
+<td align="left">random()</td>
+<td align="left">随机生成下一个实数，它在[0，1)范围内</td>
+</tr>
+<tr>
+<td align="left"><code>seed([x])</code></td>
+<td align="left">改变随机数生成器的种子seed。如果不了解其原理，不必特别去设定seed，Python会选择seed</td>
+</tr>
+<tr>
+<td align="left">shuffle(lst)</td>
+<td align="left">将序列的所有元素随机排序</td>
+</tr>
+<tr>
+<td align="left">uniform(x，y)</td>
+<td align="left">随机生成下一个实数，它在<code>[x，y]</code>范围内</td>
+</tr>
+</tbody></table>
+<h2 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h2><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">acos(x)</td>
+<td align="left">返回x的反余弦弧度值</td>
+</tr>
+<tr>
+<td align="left">asin(x)</td>
+<td align="left">返回x的反正弦弧度值</td>
+</tr>
+<tr>
+<td align="left">atan(x)</td>
+<td align="left">返回x的反正切弧度值</td>
+</tr>
+<tr>
+<td align="left">atan2(y，x)</td>
+<td align="left">返回给定的 X 及 Y 坐标值的反正切值</td>
+</tr>
+<tr>
+<td align="left">cos(x)</td>
+<td align="left">返回x的弧度的余弦值</td>
+</tr>
+<tr>
+<td align="left">hypot(x，y)</td>
+<td align="left">返回欧几里德范数 <code>sqrt(x*x + y*y)</code></td>
+</tr>
+<tr>
+<td align="left">sin(x)</td>
+<td align="left">返回的x弧度的正弦值</td>
+</tr>
+<tr>
+<td align="left">tan(x)</td>
+<td align="left">返回x弧度的正切值</td>
+</tr>
+<tr>
+<td align="left">degrees(x)</td>
+<td align="left">将弧度转换为角度，如degrees(math.pi/2) ，返回90.0</td>
+</tr>
+<tr>
+<td align="left">radians(x)</td>
+<td align="left">将角度转换为弧度</td>
+</tr>
+</tbody></table>
+<h2 id="数学常量"><a href="#数学常量" class="headerlink" title="数学常量"></a>数学常量</h2><table>
+<thead>
+<tr>
+<th align="left">常量</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">pi</td>
+<td align="left">数学常量 pi(圆周率，一般以π来表示)</td>
+</tr>
+<tr>
+<td align="left">e</td>
+<td align="left">数学常量 e，e即自然常数</td>
+</tr>
+</tbody></table>
+<h2 id="数值类型转换"><a href="#数值类型转换" class="headerlink" title="数值类型转换"></a>数值类型转换</h2><table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">int(x [,base])</td>
+<td align="left">将x（其他进制）转为十进制整数</td>
+</tr>
+<tr>
+<td align="left">float(x)</td>
+<td align="left">将x转为浮点数</td>
+</tr>
+<tr>
+<td align="left">compile(x)</td>
+<td align="left">创建复数</td>
+</tr>
+<tr>
+<td align="left">str(x)</td>
+<td align="left">将对象x转为字符串</td>
+</tr>
+<tr>
+<td align="left">repr(x)</td>
+<td align="left">将对象x转为表达式字符串</td>
+</tr>
+<tr>
+<td align="left">eval(str)</td>
+<td align="left">执行python字符串表达式，并返回对象</td>
+</tr>
+<tr>
+<td align="left">tiple(s)</td>
+<td align="left">将序列s转为元组</td>
+</tr>
+<tr>
+<td align="left">list(s)</td>
+<td align="left">将序列s转为列表</td>
+</tr>
+<tr>
+<td align="left">chr(x)</td>
+<td align="left">将unicode码(整数)转为字符</td>
+</tr>
+<tr>
+<td align="left">ord(x)</td>
+<td align="left">将字转为符unicode码(整数)</td>
+</tr>
+<tr>
+<td align="left">hex(x)</td>
+<td align="left">将整数转为十六进制字符串</td>
+</tr>
+<tr>
+<td align="left">oct(x)</td>
+<td align="left">将整数转为八进制字符</td>
+</tr>
+</tbody></table>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/luchsun">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BenRmy">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://benrmy.github.io/">Rmy&#39;s Page</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

@@ -11,7 +11,7 @@
 
     <title>
         
-        Hello World - Rmy的博客 | Rmy&#39;s Blog
+        流程控制语句 - Rmy的博客 | Rmy&#39;s Blog
         
     </title>
 
@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-text">条件控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="toc-text">循环控制语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for-%E8%AF%AD%E5%8F%A5"><span class="toc-text">for 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pass-%E8%AF%AD%E5%8F%A5"><span class="toc-text">pass 语句</span></a></li></ol>
 </div>
     
 </div>
@@ -124,11 +124,17 @@
 
 <div class="post-container">
     <div class="post-title">
-        Hello World
+        流程控制语句
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2019-01-05 14:33:37</span></span>
+        <span class="attr">发布于：<span>2019-02-16 14:01:25</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
         
         </span>
         <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
@@ -136,15 +142,19 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h2 id="条件控制语句"><a href="#条件控制语句" class="headerlink" title="条件控制语句"></a>条件控制语句</h2><p>关键字if - elif - else。</p>
+<ul>
+<li>每个条件后面要使用冒号(:)，表示接下来是满足条件后要执行的语句块。</li>
+<li>使用缩进来划分语句块，相同缩进数的语句在一起组成一个语句块。</li>
+<li>在Python中没有switch - case语句。</li>
+</ul>
+<h2 id="循环控制语句"><a href="#循环控制语句" class="headerlink" title="循环控制语句"></a>循环控制语句</h2><p>循环语句有 for 和 while，没有do..while循环。</p>
+<p>可以使用 CTRL+C 来退出当前的无限循环，无限循环在服务器上客户端的实时请求非常有用。</p>
+<p>while 循环可以使用 else 语句：在条件语句为 false 时执行 else 的语句块。类似if语句语法，如果while循环体中只有一条语句，可以将该语句与while写在同一行中。</p>
+<h3 id="for-语句"><a href="#for-语句" class="headerlink" title="for 语句"></a>for 语句</h3><p>for循环可以遍历任何序列的项目，如一个列表或者一个字符串。也可使用 else 语句：在条件语句为 false 时执行 else 的语句块。</p>
+<p>break 语句用于跳出当前循环体，之后剩余语句不执行，任何else块将不执行；continue语句用于跳出当次循环块后的语句，进入下一轮循环。</p>
+<p>需要遍历数字序列，可以使用内置range()函数。它会生成数列。也可以使用range指定区间的值。也可以使range以指定数字开始并指定不同的增量(甚至可以是负数，有时这也叫做步长)。</p>
+<h2 id="pass-语句"><a href="#pass-语句" class="headerlink" title="pass 语句"></a>pass 语句</h2><p>pass是空语句，是为了保持程序结构的完整性。pass 不做任何事情，一般用做占位语句。</p>
 
         
             <div class="donate-container">

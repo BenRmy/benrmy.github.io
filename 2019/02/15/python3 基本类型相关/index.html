@@ -11,7 +11,7 @@
 
     <title>
         
-        Hello World - Rmy的博客 | Rmy&#39;s Blog
+        基本类型相关 - Rmy的博客 | Rmy&#39;s Blog
         
     </title>
 
@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84"><span class="toc-text">列表和元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%96%B9%E6%B3%95"><span class="toc-text">列表方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E9%94%AE%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">字典键的特性</span></a></li></ol>
 </div>
     
 </div>
@@ -124,11 +124,17 @@
 
 <div class="post-container">
     <div class="post-title">
-        Hello World
+        基本类型相关
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2019-01-05 14:33:37</span></span>
+        <span class="attr">发布于：<span>2019-02-15 17:11:05</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
         
         </span>
         <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
@@ -136,15 +142,87 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h2 id="列表和元组"><a href="#列表和元组" class="headerlink" title="列表和元组"></a>列表和元组</h2><table>
+<thead>
+<tr>
+<th align="left">语句</th>
+<th align="left">函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">len(list)</td>
+<td align="left">列表元素个数</td>
+</tr>
+<tr>
+<td align="left">max(list)</td>
+<td align="left">返回列表元素最大值</td>
+</tr>
+<tr>
+<td align="left">min(list)</td>
+<td align="left">返回列表元素最小值</td>
+</tr>
+<tr>
+<td align="left">list(seq)</td>
+<td align="left">将元组转换为列表</td>
+</tr>
+</tbody></table>
+<h2 id="列表方法"><a href="#列表方法" class="headerlink" title="列表方法"></a>列表方法</h2><table>
+<thead>
+<tr>
+<th align="left">语句</th>
+<th align="left">方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">list.append(obj)</td>
+<td align="left">在列表末尾添加新的对象</td>
+</tr>
+<tr>
+<td align="left">list.count(obj)</td>
+<td align="left">统计某个元素在列表中出现的次数</td>
+</tr>
+<tr>
+<td align="left">list.extend(seq)</td>
+<td align="left">在列表末尾一次性追加另一个序列中的多个值(用新列表扩展原来的列表)</td>
+</tr>
+<tr>
+<td align="left">list.index(obj)</td>
+<td align="left">从列表中找出某个值第一个匹配项的索引位置</td>
+</tr>
+<tr>
+<td align="left">list.insert(index，obj)</td>
+<td align="left">将对象插入列表</td>
+</tr>
+<tr>
+<td align="left"><code>list.pop(obj=list[-1])</code></td>
+<td align="left">移除列表中的一个元素(默认最后一个元素)，并且返回该元素的值</td>
+</tr>
+<tr>
+<td align="left">list.remove(obj)</td>
+<td align="left">移除列表中某个值的第一个匹配项</td>
+</tr>
+<tr>
+<td align="left">list.reverse()</td>
+<td align="left">反向列表中元素</td>
+</tr>
+<tr>
+<td align="left"><code>list.sort([func])</code></td>
+<td align="left">对原列表进行排序</td>
+</tr>
+<tr>
+<td align="left">list.clear()</td>
+<td align="left">清空列表</td>
+</tr>
+<tr>
+<td align="left">list.copy()</td>
+<td align="left">复制列表</td>
+</tr>
+</tbody></table>
+<h2 id="字典键的特性"><a href="#字典键的特性" class="headerlink" title="字典键的特性"></a>字典键的特性</h2><p>字典值可以没有限制地取任何python对象，既可以是标准的对象，也可以是用户定义的，但键不行。两个重要的点需要记住：</p>
+<ul>
+<li>不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住。</li>
+<li>键必须不可变，所以可以用数字，字符串或元组充当，而用列表就不行。</li>
+</ul>
 
         
             <div class="donate-container">

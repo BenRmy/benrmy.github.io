@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="hexo自建博客">
+    <meta name="keyword"  content="python 爬虫 rmy">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        一些库的使用建议 - Rmy的博客 | Rmy&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> 大道甚夷,而人好径,终为所误 </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rmy</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%89%E9%9C%80%E9%80%89%E6%8B%A9sort-%E6%88%96%E8%80%85sorted"><span class="toc-text">按需选择sort()或者sorted()</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%9B%B8%E6%AF%94sort-%EF%BC%8Csorted-%E4%BD%BF%E7%94%A8%E7%9A%84%E8%8C%83%E5%9B%B4%E6%9B%B4%E5%B9%BF%EF%BC%8C%E4%B8%A4%E8%80%85%E7%9A%84%E5%87%BD%E6%95%B0%E5%BD%A2%E5%BC%8F%E5%88%86%E5%88%AB%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">1.相比sort()，sorted()使用的范围更广，两者的函数形式分别如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-sort-%E4%BC%9A%E4%BF%AE%E6%94%B9%E5%8E%9F%E6%9D%A5%E7%9A%84%E5%88%97%E8%A1%A8%EF%BC%8C%E8%80%8Csorted-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E5%88%97%E8%A1%A8%E3%80%82"><span class="toc-text">2. sort()会修改原来的列表，而sorted()重新生成一个列表。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%97%A0%E8%AE%BA%E6%98%AFsort-%E8%BF%98%E6%98%AFsorted-%E5%87%BD%E6%95%B0%EF%BC%8C%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0key%E6%AF%94%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0cmp%E7%9A%84%E6%95%88%E7%8E%87%E8%A6%81%E9%AB%98%E3%80%82"><span class="toc-text">3. 无论是sort()还是sorted()函数，传入参数key比传入参数cmp的效率要高。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-sorted-%E5%87%BD%E6%95%B0%E7%9A%84%E5%8A%9F%E8%83%BD%E5%8D%81%E5%88%86%E5%BC%BA%E5%A4%A7%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%AE%83%E5%8F%AF%E4%BB%A5%E6%96%B9%E4%BE%BF%E5%9C%B0%E9%92%88%E5%AF%B9%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E3%80%82"><span class="toc-text">4. sorted()函数的功能十分强大，使用它可以方便地针对不同的数据结构进行排序。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8copy%E6%A8%A1%E5%9D%97%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%AF%B9%E8%B1%A1"><span class="toc-text">使用copy模块深拷贝对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-text">比较</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Counter%E8%BF%9B%E8%A1%8C%E8%AE%A1%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="toc-text">使用Counter进行计数统计</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> 大道甚夷,而人好径,终为所误 </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        一些库的使用建议
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-23 10:44:55</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="按需选择sort-或者sorted"><a href="#按需选择sort-或者sorted" class="headerlink" title="按需选择sort()或者sorted()"></a>按需选择sort()或者sorted()</h1><h2 id="1-相比sort-，sorted-使用的范围更广，两者的函数形式分别如下："><a href="#1-相比sort-，sorted-使用的范围更广，两者的函数形式分别如下：" class="headerlink" title="1.相比sort()，sorted()使用的范围更广，两者的函数形式分别如下："></a>1.相比sort()，sorted()使用的范围更广，两者的函数形式分别如下：</h2><ul>
+<li><code>sorted(iterable cmp[，key][，reverse])</code></li>
+<li><code>s.sort(iterable cmp[，key][，reverse])</code></li>
+</ul>
+<p>不过在python3中取消掉了cmp参数。取而代之的是functools下面的cmp_to_key()函数。</p>
+<ul>
+<li>cmp为用户定义的任何比较函数，函数的参数为两个可比较的元素(来自iterable或者list)，函数根据第一个参数与第二个参数的关系依次返回-1、0或者+1(第一个参数小于第二个参数则返回负数)。默认为None。</li>
+<li>key是一个带参数的函数，用来为每个元素提取比较值，默认为None(即直接比较每个元素)。</li>
+<li>reverse表示排序结果是否反转。</li>
+</ul>
+<h2 id="2-sort-会修改原来的列表，而sorted-重新生成一个列表。"><a href="#2-sort-会修改原来的列表，而sorted-重新生成一个列表。" class="headerlink" title="2. sort()会修改原来的列表，而sorted()重新生成一个列表。"></a>2. sort()会修改原来的列表，而sorted()重新生成一个列表。</h2><p>sort()函数不需要复制原有列表，消耗的内存较少，效率也较高。</p>
+<h2 id="3-无论是sort-还是sorted-函数，传入参数key比传入参数cmp的效率要高。"><a href="#3-无论是sort-还是sorted-函数，传入参数key比传入参数cmp的效率要高。" class="headerlink" title="3. 无论是sort()还是sorted()函数，传入参数key比传入参数cmp的效率要高。"></a>3. 无论是sort()还是sorted()函数，传入参数key比传入参数cmp的效率要高。</h2><p>cmp传入的函数在整个排序过程中会调用多次，函数开销较大；而key针对每个元素仅作一次处理。</p>
+<h2 id="4-sorted-函数的功能十分强大，使用它可以方便地针对不同的数据结构进行排序。"><a href="#4-sorted-函数的功能十分强大，使用它可以方便地针对不同的数据结构进行排序。" class="headerlink" title="4. sorted()函数的功能十分强大，使用它可以方便地针对不同的数据结构进行排序。"></a>4. sorted()函数的功能十分强大，使用它可以方便地针对不同的数据结构进行排序。</h2><p>排序示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">persons = [&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Jon&#x27;</span>，<span class="string">&#x27;age&#x27;</span>: <span class="number">32</span>&#125;，</span><br><span class="line">               &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Alan&#x27;</span>，<span class="string">&#x27;age&#x27;</span>: <span class="number">50</span>&#125;，</span><br><span class="line">               &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Bob&#x27;</span>，<span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>&#125;]</span><br><span class="line">persons.sort(key=<span class="keyword">lambda</span> x: (x[<span class="string">&#x27;name&#x27;</span>]))</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"><span class="comment"># sorted</span></span><br><span class="line"><span class="comment"># 字典排序</span></span><br><span class="line">phonebook = &#123;<span class="string">&#x27;Linda&#x27;</span>: <span class="string">&#x27;7750&#x27;</span>，<span class="string">&#x27;Bob&#x27;</span>: <span class="string">&#x27;9345&#x27;</span>，<span class="string">&#x27;Carol&#x27;</span>: <span class="string">&#x27;5834&#x27;</span>&#125;</span><br><span class="line">print(<span class="built_in">sorted</span>(phonebook.items()，key=itemgetter(<span class="number">1</span>)))</span><br><span class="line"><span class="comment"># 多维list排序</span></span><br><span class="line">g = [[<span class="string">&#x27;Bob&#x27;</span>，<span class="number">95</span>，<span class="string">&#x27;A&#x27;</span>]，[<span class="string">&#x27;Alan&#x27;</span>，<span class="number">86</span>，<span class="string">&#x27;C&#x27;</span>]，[<span class="string">&#x27;Mandy&#x27;</span>，<span class="number">82</span>，<span class="string">&#x27;A&#x27;</span>]，[<span class="string">&#x27;Rob&#x27;</span>，<span class="number">86</span>，<span class="string">&#x27;E&#x27;</span>]]</span><br><span class="line">print(<span class="built_in">sorted</span>(g，key=itemgetter(<span class="number">2</span>，<span class="number">1</span>)))</span><br><span class="line"><span class="comment"># 字典中混合list排序</span></span><br><span class="line"><span class="comment"># 如果字典中的key或者值为列表，需要对列表中的某一个位置的元素排序也是可以做到的。</span></span><br><span class="line">d = &#123;<span class="string">&#x27;Li&#x27;</span>: [<span class="string">&#x27;M&#x27;</span>，<span class="number">7</span>]，<span class="string">&#x27;Zhang&#x27;</span>: [<span class="string">&#x27;E&#x27;</span>，<span class="number">2</span>]，<span class="string">&#x27;Wang&#x27;</span>: [<span class="string">&#x27;P&#x27;</span>，<span class="number">3</span>]，<span class="string">&#x27;Du&#x27;</span>: [<span class="string">&#x27;C&#x27;</span>，<span class="number">2</span>]，</span><br><span class="line">     <span class="string">&#x27;Ma&#x27;</span>: [<span class="string">&#x27;C&#x27;</span>，<span class="number">9</span>]，<span class="string">&#x27;Zhe&#x27;</span>: [<span class="string">&#x27;H&#x27;</span>，<span class="number">7</span>]&#125;</span><br><span class="line">print(<span class="built_in">sorted</span>(d.items()，key=<span class="keyword">lambda</span> k: itemgetter(<span class="number">1</span>)(k[<span class="number">1</span>])))</span><br><span class="line"><span class="comment"># list中混合字典排序</span></span><br><span class="line"><span class="comment"># 列表中的每一个元素为字典形式，可以针对字典的多个key值进行排序也可。</span></span><br><span class="line">g2 = [&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Bob&#x27;</span>，<span class="string">&#x27;wins&#x27;</span>: <span class="number">10</span>，<span class="string">&#x27;losses&#x27;</span>: <span class="number">3</span>，<span class="string">&#x27;rating&#x27;</span>: <span class="number">75.00</span>&#125;，</span><br><span class="line">      &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;David&#x27;</span>，<span class="string">&#x27;wins&#x27;</span>: <span class="number">3</span>，<span class="string">&#x27;losses&#x27;</span>: <span class="number">5</span>，<span class="string">&#x27;rating&#x27;</span>: <span class="number">57.00</span>&#125;，</span><br><span class="line">      &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Carol&#x27;</span>，<span class="string">&#x27;wins&#x27;</span>: <span class="number">4</span>，<span class="string">&#x27;losses&#x27;</span>: <span class="number">5</span>，<span class="string">&#x27;rating&#x27;</span>: <span class="number">57.00</span>&#125;，</span><br><span class="line">      &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Patty&#x27;</span>，<span class="string">&#x27;wins&#x27;</span>: <span class="number">9</span>，<span class="string">&#x27;losses&#x27;</span>: <span class="number">3</span>，<span class="string">&#x27;rating&#x27;</span>: <span class="number">71.48</span>&#125;，]</span><br><span class="line">print(<span class="built_in">sorted</span>(g2，key=itemgetter(<span class="string">&#x27;rating&#x27;</span>，<span class="string">&#x27;name&#x27;</span>)))</span><br></pre></td></tr></table></figure>
+<h1 id="使用copy模块深拷贝对象"><a href="#使用copy模块深拷贝对象" class="headerlink" title="使用copy模块深拷贝对象"></a>使用copy模块深拷贝对象</h1><ul>
+<li>浅拷贝：构造一个新的复合对象并将原对象中发现的引用插入该对象中，浅拷贝的实现方式有多种，如工厂函数、切片操作、copy模块中的copy操作等。</li>
+<li>深拷贝：也构造一个新的复合对象，但是遇到引用会继续递归拷贝其所指向的具体内容，也就是说它会针对引用所指向的对象继续执行拷贝，因此产生的对象不受其他引用对象操作的影响。</li>
+</ul>
+<h1 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h1><ul>
+<li>赋值是将一个对象的地址赋值给一个变量，让变量指向该地址( 旧瓶装旧酒 )。</li>
+<li>浅拷贝是在另一块地址中创建一个新的变量或容器，但是容器内的元素的地址均是源对象的元素的地址的拷贝。也就是说新的容器中指向了旧的元素( 新瓶装旧酒 )。</li>
+<li>深拷贝是在另一块地址中创建一个新的变量或容器，同时容器内的元素的地址也是新开辟的，仅仅是值相同而已，是完全的副本。也就是说( 新瓶装新酒 )。</li>
+</ul>
+<h1 id="使用Counter进行计数统计"><a href="#使用Counter进行计数统计" class="headerlink" title="使用Counter进行计数统计"></a>使用Counter进行计数统计</h1><p>Counter类属于字典类的子类，是一个容器对象，主要用来统计散列对象，支持集合操作+、-、&amp;和|，其中&amp;和|操作分别返回两个Counter对象各个元素的最小值和最大值，它提供了三种不同的方式来初始化：</p>
+<ul>
+<li>Counter(‘success’)    # 可迭代对象</li>
+<li>Counter(s=3，c=2，e=1，u=1)    # 关键字参数</li>
+<li>Counter({‘s’: 3，’c’: 2，’e’: 1，’u’: 1})    # 字典</li>
+</ul>
+<p><strong>ConfigParser库</strong>：对配置文件进行解析。</p>
+<p><strong>使用argparse处理命令行参数</strong>：标准库还有getopt、optparse，argparse也是。</p>
+<p><strong>使用pandas处理大型csv文件</strong>：pandas是一个很强悍的数据分析计算模块。</p>
+<p>一般情况使用ElementTree解析XML，xml.dom.minidom和xml.sax是python中处理xml文件很出名的模块，但是它们很不相同：</p>
+<ul>
+<li>DOM需要将整个XML文件加载到内存中并解析为一棵树，虽然使用简单，但是占用内存较多，性能方面不占优势。</li>
+<li>SAX是基于事件驱动的，虽不需要全部装入XML文件，但其处理过程却较为复杂。cElementTree是C版本实现，优先选择。其内存上消耗明显低于DOM解析。由于它的底层进行了一定的优化，并且它的iterparse解析工具支持SAX事件驱动，能够以迭代的形式返回XML部分数据结构，从而避免将整个XML文件加载到内存中。同时，它也支持XPath查询，非常方便。</li>
+</ul>
+<p>在处理XML文件大小在GB或近似GB级别的时候，第三方的lxml是个更好的选择。</p>
+<p><strong>理解pickle优劣（Python对象持久化）</strong>：它也有C版本实现，优先选择。序列化的另一个不错的选择–JSON。</p>
+<p><strong>使用traceback</strong>：获取栈信息。</p>
+<p><strong>使用logging</strong>：记录日志信息。</p>
+<p><strong>使用threading模块</strong>：编写多线程程序。</p>
+<p><strong>使用Queue</strong>：使多线程编程更安全。</p>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/luchsun">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BenRmy">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a target="_blank" rel="noopener" href="https://benrmy.github.io/">Rmy&#39;s Page</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
